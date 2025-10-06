@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sashank Yeturi | Portfolio",
   description: "Personal portfolio of Yeturi Trilochan Sashank, a Full-Stack Developer.",
+
 };
 
 export default function RootLayout({
