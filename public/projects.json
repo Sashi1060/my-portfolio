@@ -1,0 +1,199 @@
+[
+    {
+        "title": "Real Estate Listing Platform",
+        "blurb": "Full-stack property listing platform with an admin panel for content management and venture listings.",
+        "highlights": [
+            "Admin CRUD with role-ready architecture",
+            "Venture cards, filters, and video embeds",
+            "Deployed on Vercel with a custom domain"
+        ],
+        "stack": [
+            {
+                "label": "Next.js",
+                "icon": "nextjs"
+            },
+            {
+                "label": "React-Admin",
+                "icon": "react"
+            },
+            {
+                "label": "Express.js",
+                "icon": "express"
+            },
+            {
+                "label": "MongoDB",
+                "icon": "mongodb"
+            },
+            {
+                "label": "Vercel",
+                "icon": "vercel"
+            }
+        ],
+        "links": [
+            {
+                "label": "Live Demo",
+                "href": "https://luxuriousvillashub.vercel.app/"
+            }
+        ],
+        "year": "2024",
+        "isFeatured": true
+    },
+    {
+        "title": "Image-to-PDF Converter",
+        "blurb": "High-performance utility to merge multiple images into a single PDF via a Python backend.",
+        "highlights": [
+            "Batch conversion support",
+            "Lightweight, responsive UI",
+            "Publicly deployed and accessible"
+        ],
+        "stack": [
+            {
+                "label": "FastAPI",
+                "icon": "fastapi"
+            },
+            {
+                "label": "Python",
+                "icon": "python"
+            },
+            {
+                "label": "JavaScript",
+                "icon": "javascript"
+            },
+            {
+                "label": "Vercel",
+                "icon": "vercel"
+            }
+        ],
+        "links": [
+            {
+                "label": "Live Demo",
+                "href": "https://image-to-pdf-converter-teal.vercel.app/"
+            }
+        ],
+        "year": "2024"
+    },
+    {
+        "title": "Automated Test Creator App",
+        "blurb": "An educator-focused tool to generate customizable academic tests from topics and difficulty settings.",
+        "highlights": [
+            "Prompt-based test generation",
+            "One-click PDF export",
+            "Deployed via Streamlit Cloud"
+        ],
+        "stack": [
+            {
+                "label": "Python",
+                "icon": "python"
+            },
+            {
+                "label": "Streamlit",
+                "icon": "streamlit"
+            }
+        ],
+        "links": [
+            {
+                "label": "Live Demo",
+                "href": "http://auto-suite.streamlit.app/"
+            }
+        ],
+        "year": "2024"
+    },
+    {
+        "title": "Full-Stack Code Editor",
+        "blurb": "An in-browser code editor with multi-language support, live preview, and downloadable snippets.",
+        "highlights": [
+            "Real-time code preview",
+            "Multi-language support",
+            "Persistent storage with MongoDB"
+        ],
+        "stack": [
+            {
+                "label": "React",
+                "icon": "react"
+            },
+            {
+                "label": "Node.js",
+                "icon": "nodejs"
+            },
+            {
+                "label": "Express.js",
+                "icon": "express"
+            },
+            {
+                "label": "MongoDB",
+                "icon": "mongodb"
+            }
+        ],
+        "links": [
+            {
+                "label": "GitHub",
+                "href": "https://github.com/Sashi1060/Code-Editor-MERN"
+            }
+        ],
+        "year": "2023"
+    },
+    {
+        "title": "MERN E-Commerce Site",
+        "blurb": "An end-to-end e-commerce application with product catalog, user authentication, and a shopping cart.",
+        "highlights": [
+            "JWT-based authentication",
+            "Complete shopping cart flow",
+            "Built with the MERN stack"
+        ],
+        "stack": [
+            {
+                "label": "React",
+                "icon": "react"
+            },
+            {
+                "label": "Node.js",
+                "icon": "nodejs"
+            },
+            {
+                "label": "MongoDB",
+                "icon": "mongodb"
+            },
+            {
+                "label": "TypeScript",
+                "icon": "typescript"
+            }
+        ],
+        "links": [
+            {
+                "label": "GitHub",
+                "href": "https://github.com/Sashi1060"
+            }
+        ],
+        "year": "2023"
+    },
+    {
+        "title": "Django & FAST APIs",
+        "blurb": "A collection of backend services and utilities used across various projects, featuring clean design.",
+        "highlights": [
+            "Secure authentication flows",
+            "Efficient pagination & filtering",
+            "Comprehensive test coverage"
+        ],
+        "stack": [
+            {
+                "label": "Django",
+                "icon": "django"
+            },
+            {
+                "label": "FastAPI",
+                "icon": "fastapi"
+            },
+            {
+                "label": "Python",
+                "icon": "python"
+            }
+        ],
+        "links": [
+            {
+                "label": "GitHub",
+                "href": "https://github.com/Sashi1060"
+            }
+        ],
+        "year": "2023–2024"
+    }
+]
