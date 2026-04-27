@@ -23,18 +23,14 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <div className="bg-white">
-      <section className="max-w-4xl mx-auto px-6 lg:px-8 py-16 sm:py-20">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <p className="text-sm text-slate-500 font-mono mb-3 tracking-wide">
-              Blog
-            </p>
-            <h1 className="text-4xl font-semibold text-slate-900 tracking-tight">
-              Writing
-            </h1>
-            <p className="mt-3 text-slate-500 max-w-md">
-              Recent posts from my blog on CausalBlogs. Full reading experience
+    <div>
+      <section className="page-shell section-pad max-w-5xl">
+        <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+          <div className="max-w-2xl">
+            <p className="kicker">Blog</p>
+            <h1 className="display-title mt-3">Writing</h1>
+            <p className="lead mt-4">
+              Recent posts from my CausalBlogs profile. The full reading experience
               lives there.
             </p>
           </div>
@@ -42,9 +38,9 @@ export default function BlogPage() {
             href={buildBlogAuthorUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors whitespace-nowrap"
+            className="btn-secondary whitespace-nowrap"
           >
-            All posts on CausalBlogs
+            All posts
             <ExternalLink className="h-4 w-4" />
           </a>
         </div>
@@ -52,10 +48,7 @@ export default function BlogPage() {
         {!loaded ? (
           <div className="grid gap-4 sm:grid-cols-2">
             {[0, 1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-lg border border-slate-200 bg-slate-50 h-36 animate-pulse"
-              />
+              <div key={i} className="h-40 animate-pulse soft-card bg-stone-100" />
             ))}
           </div>
         ) : posts.length > 0 ? (
@@ -65,15 +58,15 @@ export default function BlogPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
-            <p className="text-sm text-slate-400 mb-3">
+          <div className="rounded-lg border border-dashed border-stone-300 bg-white/70 p-12 text-center">
+            <p className="mb-3 text-sm text-stone-500">
               No posts available from the API right now.
             </p>
             <a
               href={buildBlogAuthorUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-slate-900 transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900"
             >
               Visit my blog on CausalBlogs
               <ExternalLink className="h-4 w-4" />

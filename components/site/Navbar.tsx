@@ -47,15 +47,20 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 bg-white border-b border-slate-200 transition-shadow duration-150 ${scrolled ? 'shadow-sm' : ''}`}
+      className={`fixed w-full z-50 border-b border-stone-200/80 bg-[var(--background)]/88 backdrop-blur-xl transition-shadow duration-150 ${
+        scrolled ? 'shadow-[0_10px_35px_rgba(48,37,22,0.08)]' : ''
+      }`}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
           <Link
             href="/"
-            className="text-sm font-semibold text-slate-900 hover:text-slate-600 transition-colors"
+            className="group inline-flex items-center gap-2 text-sm font-black tracking-tight text-stone-950 transition-colors hover:text-teal-800"
           >
-            Sashank Yeturi
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-stone-950 text-xs text-white transition group-hover:bg-teal-800">
+              SY
+            </span>
+            <span>Sashank Yeturi</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-0.5">
@@ -68,8 +73,8 @@ export default function Navbar() {
                   aria-current={isActive ? 'page' : undefined}
                   className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                     isActive
-                      ? 'text-slate-900 font-medium bg-slate-100'
-                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                      ? 'text-teal-900 font-bold bg-teal-100/80'
+                      : 'text-stone-600 hover:text-stone-950 hover:bg-white/70'
                   }`}
                 >
                   {link.label}
@@ -83,7 +88,7 @@ export default function Navbar() {
             type="button"
             aria-expanded={isOpen}
             aria-label="Toggle navigation"
-            className="md:hidden p-2 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            className="md:hidden p-2 rounded-md text-stone-600 hover:text-stone-950 hover:bg-white/70 transition-colors"
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -91,7 +96,7 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white">
+        <div className="md:hidden border-t border-stone-200/80 bg-[var(--paper)]/95 shadow-[0_18px_45px_rgba(48,37,22,0.12)]">
           <div className="px-4 py-2 space-y-0.5">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -103,8 +108,8 @@ export default function Navbar() {
                   aria-current={isActive ? 'page' : undefined}
                   className={`block px-3 py-2.5 text-sm rounded-md transition-colors ${
                     isActive
-                      ? 'text-slate-900 font-medium bg-slate-100'
-                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                      ? 'text-teal-900 font-bold bg-teal-100/80'
+                      : 'text-stone-600 hover:text-stone-950 hover:bg-white/70'
                   }`}
                 >
                   {link.label}

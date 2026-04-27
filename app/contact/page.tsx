@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 
 type FormStatus = {
   submitted: boolean;
@@ -28,17 +28,14 @@ export default function ContactPage() {
     );
 
     try {
-      const response = await fetch(
-        "https://formsubmit.co/ajax/sashankyeturi6@gmail.com",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch("https://formsubmit.co/ajax/sashankyeturi6@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const data: { success?: boolean } = await response.json();
 
@@ -68,142 +65,98 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-white">
-      <section className="max-w-4xl mx-auto px-6 lg:px-8 py-16 sm:py-20">
-        <div className="mb-10">
-          <p className="text-sm text-slate-500 font-mono mb-3 tracking-wide">
-            Contact
-          </p>
-          <h1 className="text-4xl font-semibold text-slate-900 tracking-tight">
-            Get in Touch
-          </h1>
-          <p className="mt-3 text-slate-500 max-w-md">
-            Open to new opportunities, collaborations, and interesting
-            conversations.
+    <div>
+      <section className="page-shell section-pad max-w-5xl">
+        <div className="mb-10 max-w-2xl">
+          <p className="kicker">Contact</p>
+          <h1 className="display-title mt-3">Get in Touch</h1>
+          <p className="lead mt-4">
+            Open to new opportunities, collaborations, and interesting product conversations.
           </p>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-2">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-sm font-semibold text-slate-900 mb-4">
-                Direct contact
-              </h2>
-              <div className="space-y-3">
-                <a
-                  href="mailto:sashankyeturi6@gmail.com"
-                  className="flex items-center gap-3 text-sm text-slate-600 hover:text-slate-900 transition-colors"
-                >
-                  <Mail className="h-4 w-4 text-slate-400" />
-                  sashankyeturi6@gmail.com
-                </a>
-                <a
-                  href="tel:+917207615297"
-                  className="flex items-center gap-3 text-sm text-slate-600 hover:text-slate-900 transition-colors"
-                >
-                  <Phone className="h-4 w-4 text-slate-400" />
-                  +91 7207615297
-                </a>
-                <span className="flex items-center gap-3 text-sm text-slate-500">
-                  <MapPin className="h-4 w-4 text-slate-400" />
-                  Hyderabad, India
-                </span>
-              </div>
+        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="soft-card p-6">
+            <h2 className="text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+              Direct Contact
+            </h2>
+            <div className="mt-5 space-y-3">
+              <a
+                href="mailto:sashankyeturi6@gmail.com"
+                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+              >
+                <Mail className="h-4 w-4 text-teal-700" />
+                sashankyeturi6@gmail.com
+              </a>
+              <a
+                href="tel:+917207615297"
+                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+              >
+                <Phone className="h-4 w-4 text-teal-700" />
+                +91 7207615297
+              </a>
+              <span className="flex items-center gap-3 text-sm text-stone-600">
+                <MapPin className="h-4 w-4 text-teal-700" />
+                Hyderabad, India
+              </span>
             </div>
 
-            <div>
-              <h2 className="text-sm font-semibold text-slate-900 mb-4">
-                Elsewhere
-              </h2>
-              <div className="space-y-3">
-                <a
-                  href="https://github.com/Sashi1060"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-slate-600 hover:text-slate-900 transition-colors"
-                >
-                  <Github className="h-4 w-4 text-slate-400" />
-                  github.com/Sashi1060
-                </a>
-                <a
-                  href="https://linkedin.com/in/trilochan-sashank-yeturi-24541b212"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-slate-600 hover:text-slate-900 transition-colors"
-                >
-                  <Linkedin className="h-4 w-4 text-slate-400" />
-                  Trilochan Sashank Yeturi
-                </a>
-              </div>
+            <h2 className="mt-8 text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+              Elsewhere
+            </h2>
+            <div className="mt-5 space-y-3">
+              <a
+                href="https://github.com/Sashi1060"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+              >
+                <Github className="h-4 w-4 text-teal-700" />
+                github.com/Sashi1060
+              </a>
+              <a
+                href="https://linkedin.com/in/trilochan-sashank-yeturi-24541b212"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+              >
+                <Linkedin className="h-4 w-4 text-teal-700" />
+                Trilochan Sashank Yeturi
+              </a>
             </div>
           </div>
 
-          {/* Form */}
-          <div>
-            <h2 className="text-sm font-semibold text-slate-900 mb-4">
-              Send a message
+          <div className="soft-card p-6">
+            <h2 className="text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+              Send a Message
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="mt-5 space-y-4">
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
 
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-xs font-medium text-slate-600 mb-1"
-                >
+                <label htmlFor="name" className="mb-1.5 block text-xs font-bold text-stone-700">
                   Name
                 </label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Your name"
-                  className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition"
-                />
+                <input id="name" type="text" name="name" required placeholder="Your name" className="field" />
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-medium text-slate-600 mb-1"
-                >
+                <label htmlFor="email" className="mb-1.5 block text-xs font-bold text-stone-700">
                   Email
                 </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="your@email.com"
-                  className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition"
-                />
+                <input id="email" type="email" name="email" required placeholder="your@email.com" className="field" />
               </div>
 
               <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-xs font-medium text-slate-600 mb-1"
-                >
+                <label htmlFor="subject" className="mb-1.5 block text-xs font-bold text-stone-700">
                   Subject
                 </label>
-                <input
-                  id="subject"
-                  type="text"
-                  name="subject"
-                  required
-                  placeholder="What is this about?"
-                  className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition"
-                />
+                <input id="subject" type="text" name="subject" required placeholder="What is this about?" className="field" />
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-xs font-medium text-slate-600 mb-1"
-                >
+                <label htmlFor="message" className="mb-1.5 block text-xs font-bold text-stone-700">
                   Message
                 </label>
                 <textarea
@@ -212,26 +165,19 @@ export default function ContactPage() {
                   required
                   rows={5}
                   placeholder="Tell me about your project or idea..."
-                  className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition resize-none"
+                  className="field resize-none"
                 />
               </div>
 
               {formStatus.submitted && (
-                <p
-                  className={`text-sm ${
-                    formStatus.success ? "text-emerald-600" : "text-red-500"
-                  }`}
-                >
+                <p className={`text-sm ${formStatus.success ? "text-emerald-700" : "text-red-600"}`}>
                   {formStatus.message}
                 </p>
               )}
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-md bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
+              <button type="submit" disabled={isSubmitting} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50">
                 {isSubmitting ? "Sending..." : "Send Message"}
+                <Send className="h-4 w-4" />
               </button>
             </form>
           </div>
