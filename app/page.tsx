@@ -1,466 +1,383 @@
-// // app/page.tsx
-// "use client";
-
-// import Link from "next/link";
-// import { motion, Variants } from "framer-motion";
-// import {
-//   ArrowRight,
-//   Briefcase,
-//   Mail,
-//   MapPin,
-//   Sparkles,
-//   Download,
-// } from "lucide-react";
-
-// // Animation variants for sections and items
-// const containerVariants = {
-//   hidden: { opacity: 0 },
-//   visible: {
-//     opacity: 1,
-//     transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-//   },
-// };
-
-// const itemVariants: Variants = {
-//   hidden: { opacity: 0, y: 20 },
-//   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-// };
-
-// export default function HomePage() {
-//   return (
-//     <main className="relative min-h-screen bg-gradient-to-b from-amber-50 via-white to-orange-50 font-sans">
-//       {/* Soft auras are contained to prevent horizontal scroll */}
-//       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-//         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-br from-amber-200 via-orange-100 to-transparent blur-2xl opacity-60" />
-//         <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-gradient-to-tr from-orange-200 via-amber-100 to-transparent blur-2xl opacity-60" />
-//       </div>
-
-//       {/* ===== HERO / ABOUT ===== */}
-//       <motion.section
-//         className="max-w-6xl mx-auto px-6 lg:px-8 pt-24 pb-12 sm:pt-32"
-//         initial="hidden"
-//         animate="visible"
-//         variants={containerVariants}
-//       >
-//         <div className="grid items-center gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_.8fr]">
-//           <motion.div variants={itemVariants} className="text-center md:text-left">
-//             <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm text-amber-800 shadow-sm backdrop-blur">
-//               <Sparkles className="h-4 w-4" />
-//               <span>Full-Stack Developer • MERN • FastAPI • Django</span>
-//             </div>
-
-//             <h1 className="mt-5 text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
-//               Yeturi Trilochan Sashank
-//             </h1>
-
-//             <p className="mt-4 text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto md:mx-0">
-//               I build scalable, production-ready web apps with clean, modular
-//               architecture and thoughtful UX. Comfortable across frontend and
-//               backend, I enjoy API design, performance tuning, and mentoring
-//               peers in DSA and debugging.
-//             </p>
-
-//             <div className="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-x-5 gap-y-2 text-gray-600">
-//               <a
-//                 href="mailto:sashankyeturi6@gmail.com"
-//                 className="inline-flex items-center gap-2 hover:text-orange-600"
-//               >
-//                 <Mail className="h-4 w-4" />
-//                 sashankyeturi6@gmail.com
-//               </a>
-//               <span className="hidden sm:inline text-gray-300">•</span>
-//               <span className="inline-flex items-center gap-2">
-//                 <MapPin className="h-4 w-4" />
-//                 Hyderabad, India
-//               </span>
-//             </div>
-
-//             <div className="mt-8 flex flex-wrap justify-center md:justify-start gap-3">
-//               <Link
-//                 href="/education"
-//                 className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 font-medium text-white shadow-md transition-transform hover:bg-orange-700 active:scale-95 hover:scale-[1.02]"
-//               >
-//                 Explore My Skills <ArrowRight className="h-4 w-4" />
-//               </Link>
-//               <Link
-//                 href="/contact"
-//                 className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 font-medium text-orange-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 active:scale-95"
-//               >
-//                 Contact Me
-//               </Link>
-//               <a
-//                 href="/yeturi_trilochan_sashank_resume.pdf"
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 font-medium text-gray-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 active:scale-95"
-//               >
-//                 <Download className="h-4 w-4" />
-//                 Resume
-//               </a>
-//             </div>
-//           </motion.div>
-
-//           <motion.div variants={itemVariants} className="mx-auto text-center">
-//             <div className="relative w-64 sm:w-72 md:w-80 rounded-3xl overflow-hidden group">
-//               <img
-//                 src="/sri_krishna.jpg"
-//                 alt="Sri Krishna"
-//                 className="w-full h-auto rounded-3xl shadow-2xl border-2 border-amber-200/50 transform group-hover:scale-105 transition-transform duration-300"
-//               />
-//               <div className="pointer-events-none absolute -z-10 -inset-4 rounded-[2rem] bg-gradient-to-tr from-amber-200/50 via-transparent to-transparent blur-3xl" />
-//             </div>
-//             <blockquote className="mt-6 text-amber-900/80 italic text-center font-serif max-w-sm mx-auto">
-//               <p className="text-lg">"कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।</p>
-//               <p className="text-lg">मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥"</p>
-//               <cite className="mt-2 block text-sm not-italic text-amber-800/70">
-//                 - Bhagavad Gita, 2.47
-//               </cite>
-//             </blockquote>
-//           </motion.div>
-//         </div>
-//       </motion.section>
-
-//       {/* ===== EXPERIENCE ===== */}
-//       <motion.section
-//         className="max-w-6xl mx-auto px-6 lg:px-8 pb-16 sm:pb-24"
-//         initial="hidden"
-//         whileInView="visible"
-//         viewport={{ once: true, amount: 0.2 }}
-//         variants={containerVariants}
-//       >
-//         <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-//           Work Experience
-//         </h2>
-
-//         <div className="grid gap-8 md:grid-cols-2">
-//           {/* ImaginXP — Software Engineer Trainee */}
-//           <motion.article variants={itemVariants} className="group relative overflow-hidden rounded-3xl bg-white/80 p-6 shadow-md ring-1 ring-gray-100 backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl">
-//             <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-orange-50 blur-2xl opacity-70 group-hover:blur-[38px]" />
-//             <div className="flex items-start gap-3 mb-2">
-//               <div className="grid h-10 w-10 place-items-center rounded-xl bg-orange-600 text-white shadow-md">
-//                 <Briefcase className="h-5 w-5" />
-//               </div>
-//               <div>
-//                 <h3 className="text-lg font-semibold text-gray-900">
-//                   Software Engineer Trainee
-//                 </h3>
-//                 <p className="text-sm text-gray-600">
-//                   ImaginXP – College Dekho (Girnarsoft Edu Pvt Ltd), Hyderabad
-//                 </p>
-//                 <p className="text-xs text-gray-500">July 2024 – Present</p>
-//               </div>
-//             </div>
-//             <ul className="mt-3 list-disc list-inside space-y-2 text-sm text-gray-700">
-//               <li>Built scalable React UI components for enterprise apps.</li>
-//               <li>
-//                 Integrated third-party & internal REST APIs; managed complex
-//                 state and data flows.
-//               </li>
-//               <li>
-//                 Implemented foundational Node.js logic with focused DB queries
-//                 and performance optimizations.
-//               </li>
-//             </ul>
-//             <div className="mt-4">
-//               <Link
-//                 href="/contact"
-//                 className="inline-flex items-center gap-2 text-orange-700 hover:text-orange-800 font-medium"
-//               >
-//                 Discuss this role <ArrowRight className="h-4 w-4" />
-//               </Link>
-//             </div>
-//           </motion.article>
-
-//           {/* NSE TalentSprint — FutureTech Fellowship */}
-//           <motion.article variants={itemVariants} className="group relative overflow-hidden rounded-3xl bg-white/80 p-6 shadow-md ring-1 ring-gray-100 backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl">
-//             <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-amber-50 blur-2xl opacity-70 group-hover:blur-[38px]" />
-//             <div className="flex items-start gap-3 mb-2">
-//               <div className="grid h-10 w-10 place-items-center rounded-xl bg-orange-600 text-white shadow-md">
-//                 <Briefcase className="h-5 w-5" />
-//               </div>
-//               <div>
-//                 <h3 className="text-lg font-semibold text-gray-900">
-//                   FutureTech Fellowship
-//                 </h3>
-//                 <p className="text-sm text-gray-600">
-//                   NSE TalentSprint, Hyderabad
-//                 </p>
-//                 <p className="text-xs text-gray-500">Dec 2023 – July 2024</p>
-//               </div>
-//             </div>
-//             <ul className="mt-3 list-disc list-inside space-y-2 text-sm text-gray-700">
-//               <li>
-//                 Engineered and deployed multiple full-stack MERN projects end-to-end.
-//               </li>
-//               <li>
-//                 Mentored peers in DSA, debugging techniques, and UI/UX best practices.
-//               </li>
-//               <li>
-//                 Architected modular, reusable codebases with robust project structure.
-//               </li>
-//             </ul>
-//             <div className="mt-4">
-//               <Link
-//                 href="/education"
-//                 className="inline-flex items-center gap-2 text-orange-700 hover:text-orange-800 font-medium"
-//               >
-//                 See related skills <ArrowRight className="h-4 w-4" />
-//               </Link>
-//             </div>
-//           </motion.article>
-//         </div>
-
-//         <div className="mt-12 flex flex-wrap justify-center gap-3">
-//           <Link
-//             href="/projects"
-//             className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 font-medium text-white shadow-md transition-transform hover:bg-orange-700 active:scale-95 hover:scale-[1.02]"
-//           >
-//             View All Projects <ArrowRight className="h-4 w-4" />
-//           </Link>
-//         </div>
-//       </motion.section>
-//     </main>
-//   );
-// }
-
-
-// app/page.tsx
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ArrowRight, Briefcase, ExternalLink, Mail, MapPin } from "lucide-react";
 import {
-  ArrowRight,
-  Briefcase,
-  Mail,
-  MapPin,
-  Sparkles,
-  Download,
-} from "lucide-react";
+  buildBlogAuthorUrl,
+  buildBlogPostUrl,
+  fetchLatestBlogPost,
+  type BlogPost,
+} from "@/lib/blogApi";
+import { fetchProjects, type PortfolioProject } from "@/lib/portfolioApi";
 
-// Animation variants for sections and items
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+function formatDate(value?: string | null) {
+  if (!value) return null;
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    year: "numeric",
+  }).format(new Date(value));
+}
+
+function LatestPost() {
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchLatestBlogPost().then((p) => {
+      if (mounted) {
+        setPost(p);
+        setLoaded(true);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (!loaded) {
+    return (
+      <div className="rounded-lg border border-slate-200 bg-slate-50 h-24 animate-pulse" />
+    );
+  }
+
+  if (!post) {
+    return (
+      <a
+        href={buildBlogAuthorUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded-lg border border-slate-200 bg-white p-5 hover:shadow-md transition-shadow"
+      >
+        <p className="text-sm text-slate-500">
+          Visit my blog on CausalBlogs{" "}
+          <ExternalLink className="inline h-3.5 w-3.5" />
+        </p>
+      </a>
+    );
+  }
+
+  return (
+    <a
+      href={buildBlogPostUrl(post)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block rounded-lg border border-slate-200 bg-white p-5 hover:shadow-md transition-shadow"
+    >
+      <div className="flex items-center gap-2 mb-2 text-xs text-slate-400">
+        <span>Latest post</span>
+        {post.publishedAt && (
+          <>
+            <span>·</span>
+            <time>{formatDate(post.publishedAt)}</time>
+          </>
+        )}
+        {post.readingTimeMinutes && (
+          <>
+            <span>·</span>
+            <span>{post.readingTimeMinutes} min read</span>
+          </>
+        )}
+      </div>
+      <h3 className="font-semibold text-slate-900 group-hover:text-slate-600 transition-colors">
+        {post.title}
+      </h3>
+      {post.summary && (
+        <p className="mt-1 text-sm text-slate-500 line-clamp-2">{post.summary}</p>
+      )}
+      <span className="mt-3 inline-flex items-center gap-1 text-xs text-slate-500 group-hover:text-slate-700 transition-colors">
+        Read on CausalBlogs <ExternalLink className="h-3 w-3" />
+      </span>
+    </a>
+  );
+}
+
+function FeaturedProjects() {
+  const [projects, setProjects] = useState<PortfolioProject[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchProjects().then((items) => {
+      if (mounted) {
+        const featured = items.filter((p) => p.isFeatured);
+        setProjects((featured.length > 0 ? featured : items).slice(0, 3));
+        setLoaded(true);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (!loaded) {
+    return (
+      <div className="grid gap-4 md:grid-cols-3">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className="rounded-lg border border-slate-200 bg-slate-50 h-40 animate-pulse"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (projects.length === 0) return null;
+
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <article
+          key={project.id ?? project.title}
+          className="rounded-lg border border-slate-200 bg-white p-5 hover:shadow-md transition-shadow"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            {project.year && (
+              <span className="text-xs text-slate-400">{project.year}</span>
+            )}
+          </div>
+          <h3 className="font-semibold text-slate-900 text-sm">{project.title}</h3>
+          <p className="mt-1 text-xs text-slate-500 leading-relaxed line-clamp-2">
+            {project.blurb}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1">
+            {project.stack.slice(0, 4).map((tech) => (
+              <span
+                key={tech.label}
+                className="text-xs rounded border border-slate-100 bg-slate-50 px-1.5 py-0.5 text-slate-500"
+              >
+                {tech.label}
+              </span>
+            ))}
+          </div>
+          {project.links[0] && (
+            <a
+              href={project.links[0].href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900 transition-colors"
+            >
+              {project.links[0].label} <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  );
+}
+
+const experiences = [
+  {
+    role: "Software Engineer Trainee",
+    company: "ImaginXP – College Dekho (Girnarsoft Edu Pvt Ltd)",
+    period: "Jul 2024 – Present",
+    highlights: [
+      "Built scalable React components for enterprise applications",
+      "Integrated third-party REST APIs with complex state management",
+      "Implemented Node.js backend logic with optimized DB queries",
+    ],
   },
-};
+  {
+    role: "FutureTech Fellowship",
+    company: "NSE TalentSprint, Hyderabad",
+    period: "Dec 2023 – Jul 2024",
+    highlights: [
+      "Engineered and deployed full-stack MERN projects end-to-end",
+      "Mentored peers in DSA, debugging, and UI/UX best practices",
+      "Architected modular, reusable codebases with robust structure",
+    ],
+  },
+];
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
+const focusAreas = [
+  {
+    label: "Full-Stack Engineering",
+    desc: "MERN stack, FastAPI, Django — production-ready APIs and frontends",
+  },
+  {
+    label: "Research & Writing",
+    desc: "Published ML research, technical blogging on CausalBlogs",
+  },
+  {
+    label: "Mentoring",
+    desc: "DSA coaching, code reviews, pair programming, architecture guidance",
+  },
+];
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-gradient-to-b from-amber-50 via-white to-orange-50 font-sans">
-      {/* Soft auras are contained to prevent horizontal scroll */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-br from-amber-200 via-orange-100 to-transparent blur-2xl opacity-60" />
-        <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-gradient-to-tr from-orange-200 via-amber-100 to-transparent blur-2xl opacity-60" />
-      </div>
-
-      {/* ===== HERO / ABOUT ===== */}
-      <motion.section
-        className="max-w-6xl mx-auto px-6 lg:px-8 pt-24 pb-12 sm:pt-32"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <div className="grid items-center gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_.8fr]">
-          <motion.div variants={itemVariants} className="text-center md:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm text-amber-800 shadow-sm backdrop-blur">
-              <Sparkles className="h-4 w-4" />
-              <span>Full-Stack Developer • MERN • FastAPI • Django</span>
-            </div>
-
-            <h1 className="mt-5 text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
-              Yeturi Trilochan Sashank
-            </h1>
-
-            <p className="mt-4 text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto md:mx-0">
-              I build scalable, production-ready web apps with clean, modular
-              architecture and thoughtful UX. Comfortable across frontend and
-              backend, I enjoy API design, performance tuning, and mentoring
-              peers in DSA and debugging.
-            </p>
-
-            <div className="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-x-5 gap-y-2 text-gray-600">
-              <a
-                href="mailto:sashankyeturi6@gmail.com"
-                className="inline-flex items-center gap-2 hover:text-orange-600"
-              >
-                <Mail className="h-4 w-4" />
-                sashankyeturi6@gmail.com
-              </a>
-              <span className="hidden sm:inline text-gray-300">•</span>
-              <span className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
-                Hyderabad, India
-              </span>
-            </div>
-
-            <div className="mt-8 flex flex-wrap justify-center md:justify-start gap-3">
-              <Link
-                href="/education"
-                className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 font-medium text-white shadow-md transition-transform hover:bg-orange-700 active:scale-95 hover:scale-[1.02]"
-              >
-                Explore My Skills <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 font-medium text-orange-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 active:scale-95"
-              >
-                Contact Me
-              </Link>
-              <a
-                href="/yeturi_trilochan_sashank_resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 font-medium text-gray-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 active:scale-95"
-              >
-                <Download className="h-4 w-4" />
-                Resume
-              </a>
-            </div>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="mx-auto text-center">
-            <div className="relative w-64 sm:w-72 md:w-80 rounded-3xl overflow-hidden group">
-              <Image
-                src="/sri_krishna.jpg"
-                alt="Sri Krishna"
-                width={640}
-                height={800}
-                sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
-                className="w-full h-auto rounded-3xl shadow-2xl border-2 border-amber-200/50 transform group-hover:scale-105 transition-transform duration-300"
-                priority
-              />
-              <div className="pointer-events-none absolute -z-10 -inset-4 rounded-[2rem] bg-gradient-to-tr from-amber-200/50 via-transparent to-transparent blur-3xl" />
-            </div>
-            <blockquote className="mt-6 text-amber-900/80 italic text-center font-serif max-w-sm mx-auto">
-              <p className="text-lg">
-                &quot;कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।
-              </p>
-              <p className="text-lg">
-                मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥&quot;
-              </p>
-              <cite className="mt-2 block text-sm not-italic text-amber-800/70">
-                - Bhagavad Gita, 2.47
-              </cite>
-            </blockquote>
-          </motion.div>
+    <div className="bg-white">
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-8 py-16 sm:py-24">
+        <div className="max-w-2xl">
+          <p className="text-sm text-slate-500 font-mono mb-3 tracking-wide">
+            Full-Stack Developer
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 tracking-tight leading-tight">
+            Yeturi Trilochan Sashank
+          </h1>
+          <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+            I build scalable, production-ready web applications — from React
+            frontends to FastAPI and Django backends. Based in Hyderabad, open
+            to remote.
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-slate-400">
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5" />
+              Hyderabad, India
+            </span>
+            <a
+              href="mailto:sashankyeturi6@gmail.com"
+              className="inline-flex items-center gap-1.5 hover:text-slate-600 transition-colors"
+            >
+              <Mail className="h-3.5 w-3.5" />
+              sashankyeturi6@gmail.com
+            </a>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700 transition-colors"
+            >
+              View Projects <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors"
+            >
+              Get in Touch
+            </Link>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ===== EXPERIENCE ===== */}
-      <motion.section
-        className="max-w-6xl mx-auto px-6 lg:px-8 pb-16 sm:pb-24"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-          Work Experience
-        </h2>
+      <div className="border-t border-slate-100" />
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {/* ImaginXP — Software Engineer Trainee */}
-          <motion.article
-            variants={itemVariants}
-            className="group relative overflow-hidden rounded-3xl bg-white/80 p-6 shadow-md ring-1 ring-gray-100 backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl"
-          >
-            <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-orange-50 blur-2xl opacity-70 group-hover:blur-[38px]" />
-            <div className="flex items-start gap-3 mb-2">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-orange-600 text-white shadow-md">
-                <Briefcase className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Software Engineer Trainee
-                </h3>
-                <p className="text-sm text-gray-600">
-                  ImaginXP – College Dekho (Girnarsoft Edu Pvt Ltd), Hyderabad
-                </p>
-                <p className="text-xs text-gray-500">July 2024 – Present</p>
-              </div>
+      {/* Focus areas */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {focusAreas.map((item) => (
+            <div
+              key={item.label}
+              className="rounded-lg border border-slate-200 bg-white p-5"
+            >
+              <h3 className="text-sm font-semibold text-slate-900">
+                {item.label}
+              </h3>
+              <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                {item.desc}
+              </p>
             </div>
-            <ul className="mt-3 list-disc list-inside space-y-2 text-sm text-gray-700">
-              <li>Built scalable React UI components for enterprise apps.</li>
-              <li>
-                Integrated third-party &amp; internal REST APIs; managed complex
-                state and data flows.
-              </li>
-              <li>
-                Implemented foundational Node.js logic with focused DB queries
-                and performance optimizations.
-              </li>
-            </ul>
-            <div className="mt-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-orange-700 hover:text-orange-800 font-medium"
-              >
-                Discuss this role <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </motion.article>
-
-          {/* NSE TalentSprint — FutureTech Fellowship */}
-          <motion.article
-            variants={itemVariants}
-            className="group relative overflow-hidden rounded-3xl bg-white/80 p-6 shadow-md ring-1 ring-gray-100 backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl"
-          >
-            <div className="absolute -right-8 -top-10 h-24 w-24 rounded-full bg-amber-50 blur-2xl opacity-70 group-hover:blur-[38px]" />
-            <div className="flex items-start gap-3 mb-2">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-orange-600 text-white shadow-md">
-                <Briefcase className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  FutureTech Fellowship
-                </h3>
-                <p className="text-sm text-gray-600">NSE TalentSprint, Hyderabad</p>
-                <p className="text-xs text-gray-500">Dec 2023 – July 2024</p>
-              </div>
-            </div>
-            <ul className="mt-3 list-disc list-inside space-y-2 text-sm text-gray-700">
-              <li>
-                Engineered and deployed multiple full-stack MERN projects
-                end-to-end.
-              </li>
-              <li>
-                Mentored peers in DSA, debugging techniques, and UI/UX best
-                practices.
-              </li>
-              <li>
-                Architected modular, reusable codebases with robust project
-                structure.
-              </li>
-            </ul>
-            <div className="mt-4">
-              <Link
-                href="/education"
-                className="inline-flex items-center gap-2 text-orange-700 hover:text-orange-800 font-medium"
-              >
-                See related skills <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </motion.article>
+          ))}
         </div>
+      </section>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-3">
+      <div className="border-t border-slate-100" />
+
+      {/* Featured Projects */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-base font-semibold text-slate-900">
+            Featured Work
+          </h2>
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 font-medium text-white shadow-md transition-transform hover:bg-orange-700 active:scale-95 hover:scale-[1.02]"
+            className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900 transition-colors"
           >
-            View All Projects <ArrowRight className="h-4 w-4" />
+            All projects <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
-      </motion.section>
-    </main>
+        <FeaturedProjects />
+      </section>
+
+      <div className="border-t border-slate-100" />
+
+      {/* Latest Blog Post */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-base font-semibold text-slate-900">
+            Latest Writing
+          </h2>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900 transition-colors"
+          >
+            All posts <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+        <div className="max-w-2xl">
+          <LatestPost />
+        </div>
+      </section>
+
+      <div className="border-t border-slate-100" />
+
+      {/* Experience */}
+      <section className="max-w-6xl mx-auto px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-base font-semibold text-slate-900">Experience</h2>
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900 transition-colors"
+          >
+            Full story <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {experiences.map((exp) => (
+            <article
+              key={exp.role}
+              className="rounded-lg border border-slate-200 bg-white p-5"
+            >
+              <div className="flex items-start gap-3">
+                <div className="h-8 w-8 flex-shrink-0 rounded border border-slate-200 bg-slate-50 flex items-center justify-center">
+                  <Briefcase className="h-4 w-4 text-slate-400" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-slate-900">
+                    {exp.role}
+                  </h3>
+                  <p className="text-xs text-slate-500">{exp.company}</p>
+                  <p className="text-xs text-slate-400">{exp.period}</p>
+                </div>
+              </div>
+              <ul className="mt-3 space-y-1.5">
+                {exp.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="flex items-start gap-2 text-xs text-slate-600"
+                  >
+                    <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-slate-300" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <div className="border-t border-slate-100">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h2 className="text-sm font-semibold text-slate-900">
+              Open to opportunities
+            </h2>
+            <p className="text-sm text-slate-500 mt-0.5">
+              Available for full-time roles and freelance projects.
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700 transition-colors whitespace-nowrap"
+          >
+            Get in Touch
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

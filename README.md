@@ -16,6 +16,15 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Portfolio projects, publications, and resume data are read from the blog server when available.
+Set one of these in `.env.local` if your API is not running at `http://localhost:8000`:
+
+```bash
+NEXT_PUBLIC_PORTFOLIO_API_URL=http://localhost:8000
+# or
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+```
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

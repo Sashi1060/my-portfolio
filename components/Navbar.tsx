@@ -339,6 +339,9 @@ const navLinks = [
     { href: '/about', label: 'About' },
     { href: '/education', label: 'Education' },
     { href: '/projects', label: 'Projects' },
+    { href: '/publications', label: 'Publications' },
+    { href: '/resume', label: 'Resume' },
+    { href: 'https://www.causalblogs.com/yeturi-trilochan-sashank', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
 ];
 
