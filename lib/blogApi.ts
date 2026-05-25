@@ -8,6 +8,7 @@ export type BlogPost = {
   slug: string;
   summary?: string | null;
   featuredImageUrl?: string | null;
+  blogLogoUrl?: string | null;
   publishedAt?: string | null;
   readingTimeMinutes?: number | null;
 };
@@ -15,6 +16,7 @@ export type BlogPost = {
 const AUTHOR_HANDLE = "yeturi-trilochan-sashank";
 const BLOG_PUBLIC_BASE_URL =
   process.env.NEXT_PUBLIC_BLOG_PUBLIC_URL || "https://www.causalblogs.com";
+const DEFAULT_BLOG_POST_IMAGE_PATH = "/og-image.png";
 
 function apiBaseUrl() {
   return (
@@ -34,6 +36,7 @@ type ApiPost = {
   slug: string;
   summary?: string | null;
   featured_image_url?: string | null;
+  blog_logo_url?: string | null;
   published_at?: string | null;
   reading_time_minutes?: number | null;
 };
@@ -49,6 +52,7 @@ function normalizePost(post: ApiPost): BlogPost {
     slug: post.slug,
     summary: post.summary ?? null,
     featuredImageUrl: post.featured_image_url ?? null,
+    blogLogoUrl: post.blog_logo_url ?? null,
     publishedAt: post.published_at ?? null,
     readingTimeMinutes: post.reading_time_minutes ?? null,
   };
@@ -56,6 +60,12 @@ function normalizePost(post: ApiPost): BlogPost {
 
 export function buildBlogPostUrl(post: Pick<BlogPost, "ownerUrlHandle" | "blogSlug" | "slug">) {
   return `${BLOG_PUBLIC_BASE_URL.replace(/\/$/, "")}/${post.ownerUrlHandle}/${post.blogSlug}/${post.slug}`;
+}
+
+export function blogPostImageUrl(imageUrl?: string | null, fallbackImageUrl?: string | null) {
+  const trimmed = imageUrl?.trim();
+  const fallback = fallbackImageUrl?.trim();
+  return trimmed || fallback || `${BLOG_PUBLIC_BASE_URL.replace(/\/$/, "")}${DEFAULT_BLOG_POST_IMAGE_PATH}`;
 }
 
 export function buildBlogAuthorUrl(handle = AUTHOR_HANDLE) {

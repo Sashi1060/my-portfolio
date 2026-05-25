@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import type { BlogPost } from "@/lib/blogApi";
-import { buildBlogPostUrl } from "@/lib/blogApi";
+import { blogPostImageUrl, buildBlogPostUrl } from "@/lib/blogApi";
 
 function formatDate(value?: string | null) {
   if (!value) return null;
@@ -13,16 +13,15 @@ function formatDate(value?: string | null) {
 
 export default function PostListItem({ post }: { post: BlogPost }) {
   const url = buildBlogPostUrl(post);
+  const imageUrl = blogPostImageUrl(post.featuredImageUrl, post.blogLogoUrl);
   const date = formatDate(post.publishedAt);
 
   return (
     <article className="overflow-hidden soft-card soft-card-hover">
-      {post.featuredImageUrl && (
-        <div className="aspect-[3/1] overflow-hidden bg-stone-200">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={post.featuredImageUrl} alt="" className="h-full w-full object-cover" />
-        </div>
-      )}
+      <div className="aspect-[3/1] overflow-hidden bg-stone-200">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={imageUrl} alt="" className="h-full w-full object-cover" />
+      </div>
       <div className="p-5">
         <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-stone-500">
           {date && <time dateTime={post.publishedAt ?? undefined}>{date}</time>}
