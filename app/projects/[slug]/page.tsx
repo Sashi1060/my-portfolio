@@ -47,8 +47,8 @@ export default function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="page-shell max-w-4xl py-16 text-center">
-        <p className="mb-4 text-stone-600">Project not found.</p>
-        <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-bold text-teal-700 hover:text-teal-900">
+        <p className="mb-4 text-[var(--ink-soft)]">Project not found.</p>
+        <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)] hover:text-[var(--ink)]">
           <ArrowLeft className="h-4 w-4" /> Back to projects
         </Link>
       </div>
@@ -58,7 +58,7 @@ export default function ProjectDetailPage() {
   return (
     <div>
       <div className="page-shell section-pad max-w-4xl">
-        <Link href="/projects" className="mb-8 inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900">
+        <Link href="/projects" className="mb-8 inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] hover:text-[var(--ink)]">
           <ArrowLeft className="h-4 w-4" /> All projects
         </Link>
 
@@ -71,30 +71,30 @@ export default function ProjectDetailPage() {
 
         <div className="mb-4 flex flex-wrap items-center gap-2">
           {project.isFeatured && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-800">
+            <span className="inline-flex items-center gap-1 rounded border border-[var(--line)] bg-[var(--bg)] px-2.5 py-1 font-mono text-xs font-semibold text-[var(--accent-warm)]">
               <Star className="h-3 w-3 fill-current" />
               Featured
             </span>
           )}
-          {project.year && <span className="font-mono text-xs text-stone-500">{project.year}</span>}
+          {project.year && <span className="font-mono text-xs text-[var(--ink-soft)]">{project.year}</span>}
         </div>
 
         <h1 className="display-title">{project.title}</h1>
         <p className="lead mt-4">{project.blurb}</p>
 
         {project.description && (
-          <p className="mt-4 text-base leading-8 text-stone-600">{project.description}</p>
+          <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">{project.description}</p>
         )}
 
         {project.highlights.length > 0 && (
           <div className="mt-10 soft-card p-6">
-            <h2 className="mb-4 text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+            <h2 className="field-label mb-4 text-[var(--ink)]">
               Highlights
             </h2>
             <ul className="space-y-2">
               {project.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-2.5 text-sm leading-6 text-stone-600">
-                  <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--clay)]" />
+                <li key={h} className="flex items-start gap-2.5 text-sm leading-6 text-[var(--ink-soft)]">
+                  <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 bg-[var(--accent-warm)]" />
                   {h}
                 </li>
               ))}
@@ -104,12 +104,12 @@ export default function ProjectDetailPage() {
 
         {project.stack.length > 0 && (
           <div className="mt-8">
-            <h2 className="mb-3 text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+            <h2 className="field-label mb-3 text-[var(--ink)]">
               Tech Stack
             </h2>
             <div className="flex flex-wrap gap-2">
               {project.stack.map((tech) => (
-                <span key={tech.label} className="chip bg-white text-stone-700">
+                <span key={tech.label} className="chip">
                   {tech.label}
                 </span>
               ))}

@@ -9,10 +9,21 @@ import {
 
 const experiences = [
   {
+    role: "Assistant Professor, Department of CSE",
+    company: "Career Point University (CPU)",
+    location: "Alaniya, near Kota, Rajasthan",
+    period: "Jul 6, 2026 - Present",
+    highlights: [
+      "Faculty role covering undergraduate and polytechnic-level CS coursework.",
+      "Building curriculum and notes content for web development essentials.",
+      "Research direction in AI/ML security and continual learning.",
+    ],
+  },
+  {
     role: "Software Engineer Trainee",
     company: "ImaginXP - College Dekho (Girnarsoft Edu Pvt Ltd)",
     location: "Hyderabad",
-    period: "Jul 2024 - Present",
+    period: "Jul 2024 - Jul 2026",
     highlights: [
       "Built scalable React UI components for enterprise-level applications.",
       "Integrated third-party and internal REST APIs while managing complex state and data flows.",
@@ -67,34 +78,37 @@ const skillGroups = [
 const stats = [
   { label: "Years of experience", value: "1+" },
   { label: "Projects shipped", value: "10+" },
-  { label: "Stack coverage", value: "Full-Stack" },
+  { label: "Research focus", value: "AI/ML Security" },
 ];
+
+const researchInterests = ["AI/ML security", "Continual learning"];
 
 export default function AboutPage() {
   return (
     <div>
-      <section className="border-b border-stone-200/80 bg-[var(--paper)]">
+      <section className="border-b border-[var(--line)] bg-[var(--card-bg)]">
         <div className="page-shell section-pad">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="max-w-3xl">
               <p className="kicker">About</p>
               <h1 className="display-title mt-3">Yeturi Trilochan Sashank</h1>
               <p className="lead mt-5">
-                Results-driven full-stack developer specializing in the MERN stack
-                and Python frameworks. I care about clean architecture, crisp user
-                interfaces, and software that keeps working after the demo.
+                Assistant Professor of CSE and full-stack developer working across
+                React, Next.js, FastAPI, Django, and Node/Express. I care about
+                clean architecture, crisp user interfaces, and software that keeps
+                working after the demo.
               </p>
-              <p className="mt-4 text-base leading-7 text-stone-600">
-                Currently building enterprise features at ImaginXP. Previously a
-                FutureTech Fellow at NSE TalentSprint, where I mentored peers and
-                deployed full-stack projects from the ground up.
+              <p className="mt-4 text-base leading-7 text-[var(--ink-soft)]">
+                Currently teaching at Career Point University near Kota, while
+                building CausalBlogs and Orion and continuing research direction
+                in AI/ML security and continual learning.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {stats.map((stat) => (
                 <div key={stat.label} className="soft-card p-4">
-                  <p className="text-2xl font-black text-teal-800 sm:text-3xl">{stat.value}</p>
-                  <p className="mt-2 text-xs leading-5 text-stone-600">{stat.label}</p>
+                  <p className="text-2xl font-black text-[var(--accent)] sm:text-3xl">{stat.value}</p>
+                  <p className="mt-2 font-mono text-xs leading-5 text-[var(--ink-soft)]">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -111,23 +125,26 @@ export default function AboutPage() {
           {experiences.map((exp) => (
             <article key={exp.role} className="p-6 soft-card soft-card-hover">
               <div className="flex flex-col gap-4 sm:flex-row">
-                <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-lg bg-teal-700 text-white">
+                    <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--accent)] text-white">
                   <Briefcase className="h-4 w-4" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div>
-                      <h3 className="font-black text-stone-950">{exp.role}</h3>
-                      <p className="text-sm text-stone-600">
+                      <div className="spec-row border-t-0 py-0">
+                        <span className="spec-label">Role</span>
+                        <h3 className="font-black text-[var(--ink)]">{exp.role}</h3>
+                      </div>
+                      <p className="mt-1 text-sm text-[var(--ink-soft)]">
                         {exp.company} - {exp.location}
                       </p>
                     </div>
-                    <span className="font-mono text-xs text-stone-500">{exp.period}</span>
+                    <span className="font-mono text-xs text-[var(--ink-soft)]">{exp.period}</span>
                   </div>
                   <ul className="mt-4 space-y-2">
                     {exp.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-2.5 text-sm leading-6 text-stone-600">
-                        <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--clay)]" />
+                      <li key={h} className="flex items-start gap-2.5 text-sm leading-6 text-[var(--ink-soft)]">
+                        <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 bg-[var(--accent-warm)]" />
                         {h}
                       </li>
                     ))}
@@ -139,7 +156,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-stone-200/80 bg-[var(--paper)]">
+      <section className="border-y border-[var(--line)] bg-[var(--card-bg)]">
         <div className="page-shell section-pad">
           <div className="mb-8">
             <p className="kicker">Background</p>
@@ -149,26 +166,26 @@ export default function AboutPage() {
             {education.map((item) => (
               <article key={item.degree} className="p-6 soft-card">
                 <div className="flex flex-col gap-4 sm:flex-row">
-                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-lg bg-stone-950 text-white">
+                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--ink)] text-white">
                     <GraduationCap className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
-                        <h3 className="font-black text-stone-950">{item.degree}</h3>
-                        <p className="text-sm font-semibold text-stone-700">{item.major}</p>
-                        <p className="text-sm text-stone-600">
+                        <h3 className="font-black text-[var(--ink)]">{item.degree}</h3>
+                        <p className="text-sm font-semibold text-[var(--ink)]">{item.major}</p>
+                        <p className="text-sm text-[var(--ink-soft)]">
                           {item.institution} - {item.location}
                         </p>
                       </div>
                       <div className="text-left sm:text-right">
-                        <span className="font-mono text-xs text-stone-500">{item.year}</span>
+                        <span className="font-mono text-xs text-[var(--ink-soft)]">{item.year}</span>
                         <div>
                           <a
                             href={item.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900"
+                            className="inline-flex items-center gap-1 text-xs font-bold text-[var(--accent)] hover:text-[var(--ink)]"
                           >
                             Website <ExternalLink className="h-3 w-3" />
                           </a>
@@ -176,18 +193,18 @@ export default function AboutPage() {
                       </div>
                     </div>
                     {item.publication && (
-                      <div className="mt-4 rounded-lg border border-teal-200 bg-teal-50 p-3">
+                      <div className="mt-4 rounded border border-[var(--line)] bg-[var(--bg)] p-3">
                         <div className="flex items-start gap-2">
-                          <BookOpen className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-teal-700" />
+                          <BookOpen className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[var(--accent)]" />
                           <div>
-                            <p className="mb-0.5 text-xs font-bold text-teal-900">
+                            <p className="mb-0.5 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ink-soft)]">
                               Notable Publication
                             </p>
                             <a
                               href={item.publication.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs text-teal-800 hover:underline"
+                              className="text-xs text-[var(--accent)] hover:underline"
                             >
                               {item.publication.title}
                             </a>
@@ -204,6 +221,33 @@ export default function AboutPage() {
       </section>
 
       <section className="page-shell section-pad">
+        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p className="kicker">Research</p>
+            <h2 className="section-title mt-2">Current Direction</h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {researchInterests.map((interest) => (
+              <div key={interest} className="soft-card p-6">
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+                  Focus
+                </p>
+                <p className="mt-3 text-2xl font-black text-[var(--accent)]">{interest}</p>
+              </div>
+            ))}
+            <div className="soft-card p-6 sm:col-span-2">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
+                Beyond the code
+              </p>
+              <p className="mt-3 text-base leading-7 text-[var(--ink-soft)]">
+                Writes fiction in his spare time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="page-shell section-pad">
         <div className="mb-8">
           <p className="kicker">Toolkit</p>
           <h2 className="section-title mt-2">Technical Skills</h2>
@@ -211,12 +255,12 @@ export default function AboutPage() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group) => (
             <div key={group.title} className="p-5 soft-card soft-card-hover">
-              <h3 className="mb-3 text-xs font-black uppercase tracking-[0.18em] text-teal-800">
+              <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">
                 {group.title}
               </h3>
               <div className="flex flex-wrap gap-1.5">
                 {group.skills.map((skill) => (
-                  <span key={skill} className="chip bg-white text-stone-700">
+                  <span key={skill} className="chip">
                     {skill}
                   </span>
                 ))}
@@ -226,14 +270,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-teal-800">
+      <section className="bg-[var(--ink)]">
         <div className="page-shell flex flex-col items-start justify-between gap-6 py-12 sm:flex-row sm:items-center">
           <p className="text-xl font-black text-white">Want to see what I have built?</p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/projects" className="btn-primary bg-white text-teal-900 hover:bg-teal-50">
+            <Link href="/projects" className="btn-primary bg-white text-[var(--ink)] hover:bg-[var(--accent-warm)] hover:text-white">
               Projects <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/contact" className="btn-secondary border-white/20 bg-white/5 text-white hover:border-white/40 hover:text-white">
+            <Link href="/contact" className="btn-secondary border-white/20 text-white hover:border-white/40 hover:text-white">
               Contact
             </Link>
           </div>

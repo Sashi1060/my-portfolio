@@ -48,7 +48,7 @@ function LatestPost() {
         rel="noopener noreferrer"
         className="block p-6 soft-card soft-card-hover"
       >
-        <p className="text-sm text-stone-600">
+        <p className="text-sm text-[var(--ink-soft)]">
           Visit my blog on CausalBlogs <ExternalLink className="inline h-3.5 w-3.5" />
         </p>
       </a>
@@ -62,8 +62,8 @@ function LatestPost() {
       rel="noopener noreferrer"
       className="group block p-6 soft-card soft-card-hover"
     >
-      <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-stone-500">
-        <span className="font-bold text-[var(--clay)]">Latest post</span>
+      <div className="mb-3 flex flex-wrap items-center gap-2 font-mono text-xs text-[var(--ink-soft)]">
+        <span className="font-mono font-semibold uppercase tracking-[0.12em] text-[var(--accent-warm)]">Latest post</span>
         {post.publishedAt && (
           <>
             <span>/</span>
@@ -77,15 +77,15 @@ function LatestPost() {
           </>
         )}
       </div>
-      <h3 className="text-lg font-black leading-snug text-stone-950 transition-colors group-hover:text-teal-800">
+      <h3 className="text-lg font-black leading-snug text-[var(--ink)] transition-colors group-hover:text-[var(--accent)]">
         {post.title}
       </h3>
       {post.summary && (
-        <p className="mt-2 line-clamp-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 line-clamp-2 text-sm leading-6 text-[var(--ink-soft)]">
           {post.summary}
         </p>
       )}
-      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-teal-700">
+      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)]">
         Read on CausalBlogs <ExternalLink className="h-3 w-3" />
       </span>
     </a>
@@ -129,16 +129,16 @@ function FeaturedProjects() {
           <div className="mb-4 flex items-center justify-between gap-3">
             <span className="chip">Project</span>
             {project.year && (
-              <p className="font-mono text-xs text-stone-500">{project.year}</p>
+              <p className="font-mono text-xs text-[var(--ink-soft)]">{project.year}</p>
             )}
           </div>
-          <h3 className="font-black text-stone-950">{project.title}</h3>
-          <p className="mt-2 line-clamp-3 text-sm leading-6 text-stone-600">
+          <h3 className="font-black text-[var(--ink)]">{project.title}</h3>
+          <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--ink-soft)]">
             {project.blurb}
           </p>
           <div className="mt-4 flex flex-wrap gap-1.5">
             {project.stack.slice(0, 4).map((tech) => (
-              <span key={tech.label} className="chip bg-white text-stone-700">
+              <span key={tech.label} className="chip">
                 {tech.label}
               </span>
             ))}
@@ -148,7 +148,7 @@ function FeaturedProjects() {
               href={project.links[0].href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-teal-700 transition-colors hover:text-teal-900"
+              className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-[var(--accent)] transition-colors hover:text-[var(--ink)]"
             >
               {project.links[0].label} <ExternalLink className="h-3 w-3" />
             </a>
@@ -161,9 +161,19 @@ function FeaturedProjects() {
 
 const experiences = [
   {
+    role: "Assistant Professor, Department of CSE",
+    company: "Career Point University (CPU), Alaniya, near Kota, Rajasthan",
+    period: "Jul 6, 2026 - Present",
+    highlights: [
+      "Faculty role covering undergraduate and polytechnic-level CS coursework",
+      "Building curriculum and notes content for web development essentials",
+      "Research direction in AI/ML security and continual learning",
+    ],
+  },
+  {
     role: "Software Engineer Trainee",
     company: "ImaginXP - College Dekho",
-    period: "Jul 2024 - Present",
+    period: "Jul 2024 - Jul 2026",
     highlights: [
       "Built scalable React components for enterprise applications",
       "Integrated third-party REST APIs with complex state management",
@@ -191,7 +201,7 @@ const focusAreas = [
   {
     num: "02",
     label: "Research & Writing",
-    desc: "Published ML research and technical essays on CausalBlogs.",
+    desc: "AI/ML security, continual learning, and technical essays on CausalBlogs.",
   },
   {
     num: "03",
@@ -203,57 +213,56 @@ const focusAreas = [
 export default function HomePage() {
   return (
     <div>
-      <section className="relative overflow-hidden bg-stone-950 text-white">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,118,110,0.38),transparent_36%),radial-gradient(circle_at_76%_24%,rgba(242,193,78,0.26),transparent_22rem)]" />
-        <div className="page-shell relative grid min-h-[calc(100svh-3.5rem)] items-center gap-10 py-16 lg:grid-cols-[1.1fr_0.9fr]">
+      <section className="border-b border-[var(--line)] bg-[var(--bg)]">
+        <div className="page-shell grid min-h-[calc(100svh-3.5rem)] items-center gap-10 py-16 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-xs font-bold text-teal-100">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--sun)]" />
-              Open to full-time and freelance work
+            <span className="inline-flex items-center gap-2 rounded border border-[var(--line)] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+              <span className="h-1.5 w-1.5 bg-[var(--accent-warm)]" />
+              Assistant Professor / Full-Stack Developer
             </span>
-            <h1 className="mt-7 text-5xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="mt-7 text-5xl font-black tracking-tight text-[var(--ink)] sm:text-6xl lg:text-7xl">
               Yeturi Trilochan Sashank
             </h1>
-            <p className="mt-4 max-w-xl text-xl font-semibold text-teal-100">
-              Full-Stack Developer building practical, polished web systems.
+            <p className="mt-4 max-w-xl text-xl font-semibold text-[var(--accent)]">
+              Assistant Professor of CSE and full-stack developer based in Rajasthan, India.
             </p>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-stone-300 sm:text-lg">
-              I build production-ready applications from React frontends to FastAPI,
-              Django, and Node backends. Based in Hyderabad, open to remote teams and
-              ambitious product work.
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--ink-soft)] sm:text-lg">
+              Building CausalBlogs and Orion, while researching AI/ML security and
+              continual learning. I work across React frontends, FastAPI, Django,
+              Node backends, and production data systems.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-stone-400">
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-[var(--ink-soft)]">
               <span className="inline-flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" />
-                Hyderabad, India
+                Kota/Rajasthan, India
               </span>
               <a
                 href="mailto:sashankyeturi6@gmail.com"
-                className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--accent)]"
               >
                 <Mail className="h-3.5 w-3.5" />
                 sashankyeturi6@gmail.com
               </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/projects" className="btn-primary bg-white text-stone-950 hover:bg-teal-50">
+              <Link href="/projects" className="btn-primary">
                 View Projects <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/contact" className="btn-secondary border-white/20 bg-white/5 text-white hover:border-white/40 hover:text-white">
+              <Link href="/contact" className="btn-secondary">
                 Get in Touch
               </Link>
             </div>
           </div>
 
-          <div className="soft-card hidden bg-white/8 p-5 text-white backdrop-blur md:block">
-            <div className="rounded-lg border border-white/10 bg-stone-950/50 p-6">
-              <p className="kicker text-teal-200">Current Focus</p>
+          <div className="soft-card hidden p-5 md:block">
+            <div className="rounded border border-[var(--line)] p-6">
+              <p className="kicker">Current Focus</p>
               <div className="mt-6 space-y-4">
                 {focusAreas.map((item) => (
-                  <div key={item.label} className="border-t border-white/10 pt-4">
-                    <p className="font-mono text-xs text-[var(--sun)]">{item.num}</p>
-                    <h3 className="mt-1 font-black text-white">{item.label}</h3>
-                    <p className="mt-1 text-sm leading-6 text-stone-300">{item.desc}</p>
+                  <div key={item.label} className="border-t border-[var(--line)] pt-4">
+                    <p className="font-mono text-xs text-[var(--accent-warm)]">{item.num}</p>
+                    <h3 className="mt-1 font-black text-[var(--ink)]">{item.label}</h3>
+                    <p className="mt-1 text-sm leading-6 text-[var(--ink-soft)]">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -262,14 +271,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-stone-200/80 bg-[var(--paper)]">
+      <section className="border-b border-[var(--line)] bg-[var(--card-bg)]">
         <div className="page-shell section-pad">
           <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="kicker">Work</p>
               <h2 className="section-title mt-2">Featured Projects</h2>
             </div>
-            <Link href="/projects" className="inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900">
+            <Link href="/projects" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] hover:text-[var(--ink)]">
               All projects <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -277,12 +286,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-stone-200/80">
+      <section className="border-b border-[var(--line)]">
         <div className="page-shell grid gap-8 py-14 lg:grid-cols-[0.8fr_1.2fr] lg:py-16">
           <div>
             <p className="kicker">Blog</p>
             <h2 className="section-title mt-2">Latest Writing</h2>
-            <p className="mt-3 text-sm leading-6 text-stone-600">
+            <p className="mt-3 text-sm leading-6 text-[var(--ink-soft)]">
               A quick bridge to my CausalBlogs posts on engineering, projects, and learning.
             </p>
           </div>
@@ -290,14 +299,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[var(--paper)]">
+      <section className="border-b border-[var(--line)] bg-[var(--card-bg)]">
         <div className="page-shell section-pad">
           <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="kicker">Career</p>
               <h2 className="section-title mt-2">Experience Snapshot</h2>
             </div>
-            <Link href="/about" className="inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900">
+            <Link href="/about" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] hover:text-[var(--ink)]">
               Full story <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -305,19 +314,19 @@ export default function HomePage() {
             {experiences.map((exp) => (
               <article key={exp.role} className="p-6 soft-card soft-card-hover">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-lg bg-teal-700 text-white">
+                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--accent)] text-white">
                     <Briefcase className="h-4 w-4" />
                   </div>
                   <div>
-                    <h3 className="font-black text-stone-950">{exp.role}</h3>
-                    <p className="text-sm text-stone-600">{exp.company}</p>
-                    <p className="mt-0.5 font-mono text-xs text-stone-500">{exp.period}</p>
+                    <h3 className="font-black text-[var(--ink)]">{exp.role}</h3>
+                    <p className="text-sm text-[var(--ink-soft)]">{exp.company}</p>
+                    <p className="mt-0.5 font-mono text-xs text-[var(--ink-soft)]">{exp.period}</p>
                   </div>
                 </div>
                 <ul className="mt-5 space-y-2">
                   {exp.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5 text-sm leading-6 text-stone-600">
-                      <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--clay)]" />
+                    <li key={h} className="flex items-start gap-2.5 text-sm leading-6 text-[var(--ink-soft)]">
+                      <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 bg-[var(--accent-warm)]" />
                       {h}
                     </li>
                   ))}
@@ -328,15 +337,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-teal-800">
+      <section className="bg-[var(--ink)]">
         <div className="page-shell flex flex-col items-start justify-between gap-6 py-12 sm:flex-row sm:items-center">
           <div>
             <h2 className="text-2xl font-black text-white">Open to opportunities</h2>
-            <p className="mt-1 text-sm text-teal-100">
-              Available for full-time roles, freelance projects, and thoughtful collaborations.
+            <p className="mt-1 text-sm text-stone-300">
+              Available for thoughtful collaborations, research conversations, and product work.
             </p>
           </div>
-          <Link href="/contact" className="btn-primary bg-white text-teal-900 hover:bg-teal-50">
+          <Link href="/contact" className="btn-primary bg-white text-[var(--ink)] hover:bg-[var(--accent-warm)] hover:text-white">
             Get in Touch
           </Link>
         </div>

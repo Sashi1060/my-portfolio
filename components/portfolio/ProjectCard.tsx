@@ -41,22 +41,22 @@ export default function ProjectCard({ project }: { project: PortfolioProject }) 
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex flex-wrap items-center gap-2">
           {project.isFeatured && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-800">
+            <span className="inline-flex items-center gap-1 rounded border border-[var(--line)] bg-[var(--bg)] px-2.5 py-1 font-mono text-xs font-semibold text-[var(--accent-warm)]">
               <Star className="h-3 w-3 fill-current" />
               Featured
             </span>
           )}
           {project.year && (
-            <span className="font-mono text-xs text-stone-500">{project.year}</span>
+            <span className="font-mono text-xs text-[var(--ink-soft)]">{project.year}</span>
           )}
         </div>
-        <h3 className="text-lg font-black leading-snug text-stone-950">{project.title}</h3>
-        <p className="mt-2 flex-1 text-sm leading-6 text-stone-600">{project.blurb}</p>
+        <h3 className="text-lg font-black leading-snug text-[var(--ink)]">{project.title}</h3>
+        <p className="mt-2 flex-1 text-sm leading-6 text-[var(--ink-soft)]">{project.blurb}</p>
         {project.highlights.length > 0 && (
           <ul className="mt-4 space-y-1.5">
             {project.highlights.map((h) => (
-              <li key={h} className="flex items-start gap-2 text-sm leading-6 text-stone-600">
-                <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--clay)]" />
+              <li key={h} className="flex items-start gap-2 text-sm leading-6 text-[var(--ink-soft)]">
+                <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 bg-[var(--accent-warm)]" />
                 {h}
               </li>
             ))}
@@ -64,7 +64,7 @@ export default function ProjectCard({ project }: { project: PortfolioProject }) 
         )}
         <div className="mt-5 flex flex-wrap gap-1.5">
           {project.stack.map((tech) => (
-            <span key={`${project.title}-${tech.label}`} className="chip bg-white text-stone-700">
+            <span key={`${project.title}-${tech.label}`} className="chip">
               {techShorthand[tech.icon] ?? tech.label}
             </span>
           ))}
@@ -77,7 +77,7 @@ export default function ProjectCard({ project }: { project: PortfolioProject }) 
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-stone-300 bg-white/70 px-3 py-1.5 text-xs font-bold text-stone-700 transition hover:border-teal-300 hover:text-teal-800"
+                className="inline-flex items-center gap-1.5 rounded border border-[var(--line)] bg-transparent px-3 py-1.5 text-xs font-bold text-[var(--ink-soft)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
               >
                 {linkIcon(link.label)}
                 {link.label}

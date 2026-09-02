@@ -23,13 +23,13 @@ export default function PostListItem({ post }: { post: BlogPost }) {
         <img src={imageUrl} alt="" className="h-full w-full object-cover" />
       </div>
       <div className="p-5">
-        <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-stone-500">
+        <div className="mb-3 flex flex-wrap items-center gap-3 font-mono text-xs text-[var(--ink-soft)]">
           {date && <time dateTime={post.publishedAt ?? undefined}>{date}</time>}
           {post.readingTimeMinutes && <span>{post.readingTimeMinutes} min read</span>}
         </div>
-        <h3 className="font-black leading-snug text-stone-950">{post.title}</h3>
+        <h3 className="font-black leading-snug text-[var(--ink)]">{post.title}</h3>
         {post.summary && (
-          <p className="mt-2 line-clamp-2 text-sm leading-6 text-stone-600">
+          <p className="mt-2 line-clamp-2 text-sm leading-6 text-[var(--ink-soft)]">
             {post.summary}
           </p>
         )}
@@ -37,7 +37,7 @@ export default function PostListItem({ post }: { post: BlogPost }) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 transition-colors hover:text-teal-900"
+          className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] transition-colors hover:text-[var(--ink)]"
         >
           Read on CausalBlogs
           <ExternalLink className="h-3.5 w-3.5" />

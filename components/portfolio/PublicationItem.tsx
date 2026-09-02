@@ -25,22 +25,22 @@ export default function PublicationItem({ publication }: { publication: Publicat
               {kindLabels[publication.kind] ?? publication.kind}
             </span>
             {publication.year && (
-              <span className="font-mono text-xs text-stone-500">{publication.year}</span>
+              <span className="font-mono text-xs text-[var(--ink-soft)]">{publication.year}</span>
             )}
             {publication.isFeatured && (
-              <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-700">
+              <span className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-[var(--accent-warm)]">
                 <Star className="h-3 w-3 fill-current" />
                 Featured
               </span>
             )}
           </div>
-          <h3 className="font-black text-stone-950">{publication.title}</h3>
+          <h3 className="font-black text-[var(--ink)]">{publication.title}</h3>
           {publication.authors && (
-            <p className="mt-1 text-xs text-stone-500">{publication.authors}</p>
+            <p className="mt-1 text-xs text-[var(--ink-soft)]">{publication.authors}</p>
           )}
-          <p className="mt-1 text-sm font-semibold text-stone-700">{publication.venue}</p>
+          <p className="mt-1 text-sm font-semibold text-[var(--ink)]">{publication.venue}</p>
           {publication.abstract && (
-            <p className="mt-3 text-sm leading-6 text-stone-600">{publication.abstract}</p>
+            <p className="mt-3 text-sm leading-6 text-[var(--ink-soft)]">{publication.abstract}</p>
           )}
         </div>
         <a

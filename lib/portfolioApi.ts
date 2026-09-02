@@ -40,8 +40,6 @@ export type ResumeInfo = {
   size?: number | null;
 };
 
-const FALLBACK_RESUME_URL = "/yeturi_trilochan_sashank_resume.pdf";
-
 function apiBaseUrl() {
   return (
     process.env.NEXT_PUBLIC_PORTFOLIO_API_URL ||
@@ -97,9 +95,7 @@ export async function fetchProjects(): Promise<PortfolioProject[]> {
     const projects = await getJson<ApiProject[]>("/portfolio/projects");
     return projects.map(normalizeProject);
   } catch {
-    const fallback = await fetch("/projects.json", { cache: "no-store" });
-    if (!fallback.ok) return [];
-    return fallback.json() as Promise<PortfolioProject[]>;
+    return [];
   }
 }
 
@@ -124,8 +120,8 @@ export async function fetchPublications(): Promise<Publication[]> {
 export async function fetchResume(): Promise<ResumeInfo> {
   try {
     const resume = await getJson<ResumeInfo>("/portfolio/resume");
-    return { ...resume, url: resume.url || FALLBACK_RESUME_URL };
+    return resume;
   } catch {
-    return { url: FALLBACK_RESUME_URL };
+    return { url: null };
   }
 }

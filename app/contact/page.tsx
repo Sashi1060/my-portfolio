@@ -77,31 +77,31 @@ export default function ContactPage() {
 
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="soft-card p-6">
-            <h2 className="text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+            <h2 className="field-label text-[var(--ink)]">
               Direct Contact
             </h2>
             <div className="mt-5 space-y-3">
               <a
                 href="mailto:sashankyeturi6@gmail.com"
-                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+                className="flex items-center gap-3 text-sm text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
               >
-                <Mail className="h-4 w-4 text-teal-700" />
+                <Mail className="h-4 w-4 text-[var(--accent)]" />
                 sashankyeturi6@gmail.com
               </a>
               <a
                 href="tel:+917207615297"
-                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+                className="flex items-center gap-3 text-sm text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
               >
-                <Phone className="h-4 w-4 text-teal-700" />
+                <Phone className="h-4 w-4 text-[var(--accent)]" />
                 +91 7207615297
               </a>
-              <span className="flex items-center gap-3 text-sm text-stone-600">
-                <MapPin className="h-4 w-4 text-teal-700" />
-                Hyderabad, India
+              <span className="flex items-center gap-3 text-sm text-[var(--ink-soft)]">
+                <MapPin className="h-4 w-4 text-[var(--accent)]" />
+                Kota/Rajasthan, India
               </span>
             </div>
 
-            <h2 className="mt-8 text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+            <h2 className="field-label mt-8 text-[var(--ink)]">
               Elsewhere
             </h2>
             <div className="mt-5 space-y-3">
@@ -109,25 +109,25 @@ export default function ContactPage() {
                 href="https://github.com/Sashi1060"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+                className="flex items-center gap-3 text-sm text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
               >
-                <Github className="h-4 w-4 text-teal-700" />
+                <Github className="h-4 w-4 text-[var(--accent)]" />
                 github.com/Sashi1060
               </a>
               <a
                 href="https://linkedin.com/in/trilochan-sashank-yeturi-24541b212"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-stone-700 transition-colors hover:text-teal-800"
+                className="flex items-center gap-3 text-sm text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
               >
-                <Linkedin className="h-4 w-4 text-teal-700" />
+                <Linkedin className="h-4 w-4 text-[var(--accent)]" />
                 Trilochan Sashank Yeturi
               </a>
             </div>
           </div>
 
           <div className="soft-card p-6">
-            <h2 className="text-sm font-black uppercase tracking-[0.18em] text-stone-950">
+            <h2 className="field-label text-[var(--ink)]">
               Send a Message
             </h2>
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -135,28 +135,28 @@ export default function ContactPage() {
               <input type="hidden" name="_template" value="table" />
 
               <div>
-                <label htmlFor="name" className="mb-1.5 block text-xs font-bold text-stone-700">
+                <label htmlFor="name" className="field-label mb-1.5 block">
                   Name
                 </label>
                 <input id="name" type="text" name="name" required placeholder="Your name" className="field" />
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-1.5 block text-xs font-bold text-stone-700">
+                <label htmlFor="email" className="field-label mb-1.5 block">
                   Email
                 </label>
                 <input id="email" type="email" name="email" required placeholder="your@email.com" className="field" />
               </div>
 
               <div>
-                <label htmlFor="subject" className="mb-1.5 block text-xs font-bold text-stone-700">
+                <label htmlFor="subject" className="field-label mb-1.5 block">
                   Subject
                 </label>
                 <input id="subject" type="text" name="subject" required placeholder="What is this about?" className="field" />
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-1.5 block text-xs font-bold text-stone-700">
+                <label htmlFor="message" className="field-label mb-1.5 block">
                   Message
                 </label>
                 <textarea

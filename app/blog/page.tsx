@@ -58,15 +58,15 @@ export default function BlogPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed border-stone-300 bg-white/70 p-12 text-center">
-            <p className="mb-3 text-sm text-stone-500">
+          <div className="rounded border border-dashed border-[var(--line)] bg-transparent p-12 text-center">
+            <p className="mb-3 text-sm text-[var(--ink-soft)]">
               No posts available from the API right now.
             </p>
             <a
               href={buildBlogAuthorUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] hover:text-[var(--ink)]"
             >
               Visit my blog on CausalBlogs
               <ExternalLink className="h-4 w-4" />

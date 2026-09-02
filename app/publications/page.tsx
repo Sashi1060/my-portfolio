@@ -45,8 +45,8 @@ export default function PublicationsPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed border-stone-300 bg-white/70 p-12 text-center">
-            <p className="text-sm text-stone-500">No publications yet.</p>
+          <div className="rounded border border-dashed border-[var(--line)] bg-transparent p-12 text-center">
+            <p className="text-sm text-[var(--ink-soft)]">No publications yet.</p>
           </div>
         )}
       </section>

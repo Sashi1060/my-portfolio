@@ -12,18 +12,18 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-950">
+    <footer className="border-t border-[var(--line)] bg-[var(--ink)]">
       <div className="page-shell py-12">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div>
             <Link
               href="/"
-              className="text-sm font-black text-white transition-colors hover:text-teal-200"
+              className="text-sm font-black text-white transition-colors hover:text-[var(--accent-warm)]"
             >
               Sashank Yeturi
             </Link>
-            <p className="mt-1 text-xs text-stone-400">
-              Full-Stack Developer - Hyderabad, India
+            <p className="mt-1 text-xs text-stone-300">
+              Assistant Professor of CSE and full-stack developer - Kota/Rajasthan, India
             </p>
           </div>
 
@@ -43,8 +43,8 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-stone-800 pt-6 sm:flex-row">
-          <p className="text-xs text-stone-500">
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/15 pt-6 sm:flex-row">
+          <p className="text-xs text-stone-400">
             &copy; {new Date().getFullYear()} Trilochan Sashank Yeturi. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
@@ -53,7 +53,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="text-stone-500 transition-colors hover:text-teal-300"
+              className="text-stone-400 transition-colors hover:text-[var(--accent-warm)]"
             >
               <Github className="h-4 w-4" />
             </a>
@@ -62,14 +62,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="text-stone-500 transition-colors hover:text-teal-300"
+              className="text-stone-400 transition-colors hover:text-[var(--accent-warm)]"
             >
               <Linkedin className="h-4 w-4" />
             </a>
             <a
               href="mailto:sashankyeturi6@gmail.com"
               aria-label="Email"
-              className="text-stone-500 transition-colors hover:text-teal-300"
+              className="text-stone-400 transition-colors hover:text-[var(--accent-warm)]"
             >
               <Mail className="h-4 w-4" />
             </a>

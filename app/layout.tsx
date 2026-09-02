@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sashank Yeturi",
   description:
-    "Full-stack engineer and researcher based in Hyderabad, India. Building scalable web applications with React, FastAPI, and Django.",
+    "Assistant Professor of CSE and full-stack developer based in Rajasthan, India - building CausalBlogs and Orion, and researching AI/ML security and continual learning.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen text-stone-950`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen text-[var(--ink)]`}
       >
         <Navbar />
         <main className="flex-grow pt-14">{children}</main>

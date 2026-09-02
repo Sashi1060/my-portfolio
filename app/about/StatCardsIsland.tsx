@@ -11,7 +11,7 @@ const StatCards = dynamic(() => import("./StatCards.client"), {
             {Array.from({ length: 3 }).map((_, i) => (
                 <div
                     key={i}
-                    className="h-36 sm:h-40 rounded-2xl bg-white/80 dark:bg-gray-900/70 shadow-md animate-pulse"
+                    className="h-36 animate-pulse rounded border border-[var(--line)] bg-[var(--card-bg)] sm:h-40"
                 />
             ))}
         </div>
