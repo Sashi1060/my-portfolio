@@ -25,7 +25,7 @@ export default function BlogPage() {
   return (
     <div>
       <section className="page-shell section-pad max-w-5xl">
-        <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div className="page-heading mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
             <p className="kicker">Blog</p>
             <h1 className="display-title mt-3">Writing</h1>

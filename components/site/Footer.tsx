@@ -12,7 +12,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[var(--ink)]">
+    <footer className="gradient-band border-t border-white/20">
       <div className="page-shell py-12">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div>

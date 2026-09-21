@@ -24,11 +24,11 @@ export default function PublicationsPage() {
   return (
     <div>
       <section className="page-shell section-pad max-w-5xl">
-        <div className="mb-10 max-w-2xl">
+        <div className="page-heading mb-10">
           <p className="kicker">Publications</p>
           <h1 className="display-title mt-3">Writing, Papers & Talks</h1>
           <p className="lead mt-4">
-            Research, articles, and talks pulled from the portfolio backend.
+            Exploring machine learning, human behavior, and the systems that connect them.
           </p>
         </div>
 

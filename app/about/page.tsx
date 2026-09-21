@@ -86,7 +86,7 @@ const researchInterests = ["AI/ML security", "Continual learning"];
 export default function AboutPage() {
   return (
     <div>
-      <section className="border-b border-[var(--line)] bg-[var(--card-bg)]">
+      <section className="hero-gradient border-b border-[var(--line)]">
         <div className="page-shell section-pad">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="max-w-3xl">
@@ -270,11 +270,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[var(--ink)]">
+      <section className="gradient-band">
         <div className="page-shell flex flex-col items-start justify-between gap-6 py-12 sm:flex-row sm:items-center">
           <p className="text-xl font-black text-white">Want to see what I have built?</p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/projects" className="btn-primary bg-white text-[var(--ink)] hover:bg-[var(--accent-warm)] hover:text-white">
+            <Link href="/projects" className="btn-secondary border-white/40 bg-white text-[var(--ink)] hover:bg-emerald-50">
               Projects <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/contact" className="btn-secondary border-white/20 text-white hover:border-white/40 hover:text-white">

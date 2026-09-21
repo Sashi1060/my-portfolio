@@ -47,7 +47,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 border-b border-[var(--line)] bg-[var(--bg)] transition-colors duration-150 ${
+      className={`site-nav fixed w-full z-50 border-b border-[var(--line)] transition-colors duration-150 ${
         scrolled ? 'border-[var(--accent)]' : ''
       }`}
     >
@@ -57,13 +57,13 @@ export default function Navbar() {
             href="/"
             className="group inline-flex items-center gap-2 text-sm font-black tracking-tight text-[var(--ink)] transition-colors hover:text-[var(--accent)]"
           >
-            <span className="grid h-8 w-8 place-items-center rounded bg-[var(--ink)] font-mono text-xs text-white transition group-hover:bg-[var(--accent)]">
+            <span className="gradient-band grid h-8 w-8 place-items-center rounded font-mono text-xs text-white transition group-hover:bg-[var(--accent)]">
               SY
             </span>
             <span>Sashank Yeturi</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -88,7 +88,8 @@ export default function Navbar() {
             type="button"
             aria-expanded={isOpen}
             aria-label="Toggle navigation"
-            className="rounded border border-[var(--line)] p-2 text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--ink)] md:hidden"
+            aria-controls="mobile-navigation"
+            className="rounded border border-[var(--line)] p-2 text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--ink)] lg:hidden"
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -96,8 +97,8 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="border-t border-[var(--line)] bg-[var(--bg)] md:hidden">
-          <div className="px-4 py-2 space-y-0.5">
+        <div id="mobile-navigation" className="border-t border-[var(--line)] bg-[var(--bg)] lg:hidden">
+          <div className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto px-4 py-2 space-y-0.5">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (

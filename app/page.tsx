@@ -213,14 +213,14 @@ const focusAreas = [
 export default function HomePage() {
   return (
     <div>
-      <section className="border-b border-[var(--line)] bg-[var(--bg)]">
+      <section className="hero-gradient border-b border-[var(--line)]">
         <div className="page-shell grid min-h-[calc(100svh-3.5rem)] items-center gap-10 py-16 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded border border-[var(--line)] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
               <span className="h-1.5 w-1.5 bg-[var(--accent-warm)]" />
               Assistant Professor / Full-Stack Developer
             </span>
-            <h1 className="mt-7 text-5xl font-black tracking-tight text-[var(--ink)] sm:text-6xl lg:text-7xl">
+            <h1 className="gradient-text mt-7 text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
               Yeturi Trilochan Sashank
             </h1>
             <p className="mt-4 max-w-xl text-xl font-semibold text-[var(--accent)]">
@@ -254,7 +254,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="soft-card hidden p-5 md:block">
+          <div className="soft-card focus-panel p-5">
             <div className="rounded border border-[var(--line)] p-6">
               <p className="kicker">Current Focus</p>
               <div className="mt-6 space-y-4">
@@ -337,7 +337,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[var(--ink)]">
+      <section className="gradient-band">
         <div className="page-shell flex flex-col items-start justify-between gap-6 py-12 sm:flex-row sm:items-center">
           <div>
             <h2 className="text-2xl font-black text-white">Open to opportunities</h2>
@@ -345,7 +345,7 @@ export default function HomePage() {
               Available for thoughtful collaborations, research conversations, and product work.
             </p>
           </div>
-          <Link href="/contact" className="btn-primary bg-white text-[var(--ink)] hover:bg-[var(--accent-warm)] hover:text-white">
+          <Link href="/contact" className="btn-secondary border-white/40 bg-white text-[var(--ink)] hover:bg-emerald-50">
             Get in Touch
           </Link>
         </div>
