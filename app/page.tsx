@@ -195,18 +195,18 @@ const experiences = [
 const focusAreas = [
   {
     num: "01",
-    label: "Full-Stack Engineering",
-    desc: "React interfaces, production APIs, databases, and deployment flow.",
+    label: "Continual Learning",
+    desc: "Exploring how AI can learn from new experience while retaining prior knowledge.",
   },
   {
     num: "02",
-    label: "Research & Writing",
-    desc: "AI/ML security, continual learning, and technical essays on CausalBlogs.",
+    label: "AI / ML Security",
+    desc: "Investigating the reliability and security of learning systems as they evolve.",
   },
   {
     num: "03",
-    label: "Mentoring",
-    desc: "DSA coaching, code reviews, pair programming, and architecture notes.",
+    label: "Engineering & Teaching",
+    desc: "Building CausalBlogs and Orion, teaching computer science, and sharing what I learn.",
   },
 ];
 
@@ -216,20 +216,20 @@ export default function HomePage() {
       <section className="hero-gradient border-b border-[var(--line)]">
         <div className="page-shell grid min-h-[calc(100svh-3.5rem)] items-center gap-10 py-16 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded border border-[var(--line)] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
+            <span className="research-status inline-flex items-center gap-2 border border-[var(--line)] px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
               <span className="h-1.5 w-1.5 bg-[var(--accent-warm)]" />
-              Assistant Professor / Full-Stack Developer
+              AI Research / Continual Learning
             </span>
             <h1 className="gradient-text mt-7 text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
               Yeturi Trilochan Sashank
             </h1>
             <p className="mt-4 max-w-xl text-xl font-semibold text-[var(--accent)]">
-              Assistant Professor of CSE and full-stack developer based in Rajasthan, India.
+              Researching systems that keep learning.
             </p>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--ink-soft)] sm:text-lg">
-              Building CausalBlogs and Orion, while researching AI/ML security and
-              continual learning. I work across React frontends, FastAPI, Django,
-              Node backends, and production data systems.
+              I?m an Assistant Professor of CSE and full-stack developer exploring
+              continual learning and AI/ML security. I connect research, teaching,
+              and practice through the systems I build.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-[var(--ink-soft)]">
               <span className="inline-flex items-center gap-1.5">
@@ -245,18 +245,19 @@ export default function HomePage() {
               </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/projects" className="btn-primary">
-                View Projects <ArrowRight className="h-4 w-4" />
+              <Link href="/publications" className="btn-primary">
+                Explore Research <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/contact" className="btn-secondary">
-                Get in Touch
+              <Link href="/projects" className="btn-secondary">
+                View Projects
               </Link>
             </div>
           </div>
 
           <div className="soft-card focus-panel p-5">
-            <div className="rounded border border-[var(--line)] p-6">
-              <p className="kicker">Current Focus</p>
+            <div className="p-3 sm:p-5">
+              <p className="kicker">Research notebook</p>
+              <h2 className="research-question mt-5">How can AI adapt<br />without forgetting?</h2>
               <div className="mt-6 space-y-4">
                 {focusAreas.map((item) => (
                   <div key={item.label} className="border-t border-[var(--line)] pt-4">
@@ -265,6 +266,11 @@ export default function HomePage() {
                     <p className="mt-1 text-sm leading-6 text-[var(--ink-soft)]">{item.desc}</p>
                   </div>
                 ))}
+              </div>
+              <div className="learning-cycle" aria-label="Continual learning cycle">
+                <span>Learn</span><ArrowRight className="h-3 w-3" aria-hidden="true" />
+                <span>Retain</span><ArrowRight className="h-3 w-3" aria-hidden="true" />
+                <span>Adapt</span>
               </div>
             </div>
           </div>
