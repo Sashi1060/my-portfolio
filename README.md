@@ -25,6 +25,29 @@ NEXT_PUBLIC_PORTFOLIO_API_URL=http://localhost:8000
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 ```
 
+### AI assistant (contact page)
+
+The contact page has a text-only AI assistant. The browser talks only to this app's
+`/api/assistant` routes; those call the AI character service from the server. Set these in
+`.env.local` (and in Vercel's environment variables). **They must not have the
+`NEXT_PUBLIC_` prefix**, so the key never reaches the browser:
+
+```bash
+CHARACTER_SERVICE_URL=http://localhost:8080      # the character service
+CHARACTER_SERVICE_API_KEY=...                     # = PORTFOLIO_CONTACT_API_KEY in the service
+# CHARACTER_SERVICE_TIMEOUT_MS=25000              # optional
+```
+
+If the service is unreachable or unavailable, the chat points visitors to the regular
+contact form, and messages typed into the chat's own form are sent through formsubmit.co
+instead.
+
+Tests for the route handlers (Node's built-in test runner, no extra packages):
+
+```bash
+npm test
+```
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

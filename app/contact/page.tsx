@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 
+import AssistantChat from "@/components/assistant/AssistantChat";
+import { submitToFormsubmit } from "@/lib/formsubmit";
+
 type FormStatus = {
   submitted: boolean;
   success: boolean;
@@ -28,18 +31,7 @@ export default function ContactPage() {
     );
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/sashankyeturi6@gmail.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data: { success?: boolean } = await response.json();
-
-      if (data.success) {
+      if (await submitToFormsubmit(payload)) {
         setFormStatus({
           submitted: true,
           success: true,
@@ -73,6 +65,10 @@ export default function ContactPage() {
           <p className="lead mt-4">
             Open to new opportunities, collaborations, and interesting product conversations.
           </p>
+        </div>
+
+        <div className="mb-6">
+          <AssistantChat />
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
@@ -126,7 +122,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="soft-card p-6">
+          <div id="contact-form" className="soft-card scroll-mt-24 p-6">
             <h2 className="field-label text-[var(--ink)]">
               Send a Message
             </h2>
