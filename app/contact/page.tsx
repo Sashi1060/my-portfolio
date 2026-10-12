@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import Image from "next/image";
+import { Github, Linkedin, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 
-import AssistantChat from "@/components/assistant/AssistantChat";
+import { openAssistant } from "@/lib/assistant/events";
 import { submitToFormsubmit } from "@/lib/formsubmit";
 
 type FormStatus = {
@@ -67,8 +68,27 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="mb-6">
-          <AssistantChat />
+        <div className="soft-card mb-6 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/avatar/buu-face-160.webp"
+              alt=""
+              width={160}
+              height={160}
+              className="h-14 w-14 shrink-0 rounded-full border-2 border-white object-cover ring-2 ring-[var(--accent)]"
+            />
+            <div>
+              <h2 className="field-label text-[var(--ink)]">Ask my AI assistant</h2>
+              <p className="mt-1 text-sm text-[var(--ink-soft)]">
+                Questions about my work, projects or background, or leave a message. It&apos;s in the corner of every
+                page.
+              </p>
+            </div>
+          </div>
+          <button type="button" onClick={openAssistant} className="btn-primary shrink-0">
+            Chat now
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
+          </button>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">

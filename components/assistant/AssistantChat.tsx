@@ -1,12 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Bot, Send } from "lucide-react";
+import { Send } from "lucide-react";
 
 import { submitToFormsubmit } from "@/lib/formsubmit";
 import {
   MAX_MESSAGE_CHARS,
   SESSION_STORAGE_KEY,
+  type AssistantEmotion,
   type AssistantError,
   type AssistantInfo,
   type AssistantReply,
@@ -21,8 +22,16 @@ type ChatMessage = {
 
 type Notice = { kind: "rate" | "unavailable" | "network" | "invalid"; text: string };
 
-const FALLBACK_TEXT = "The assistant is unavailable right now. You can still reach Sashank with the contact form below.";
-const NETWORK_TEXT = "Couldn't reach the assistant. Check your connection, or use the contact form below.";
+const FALLBACK_TEXT = "The assistant is unavailable right now. You can still reach Sashank with the contact form.";
+const NETWORK_TEXT = "Couldn't reach the assistant. Check your connection, or use the contact form.";
+const CONTACT_FORM_URL = "/contact#contact-form";
+
+type Props = {
+  /** True while waiting for a reply (the avatar shows "thinking"). */
+  onSendingChange?: (sending: boolean) => void;
+  /** Called for the greeting and every reply (the avatar reacts). */
+  onAssistantMessage?: (message: { text: string; emotion: AssistantEmotion }) => void;
+};
 
 function newId(): string {
   return crypto.randomUUID();
@@ -51,7 +60,7 @@ async function readError(response: Response): Promise<AssistantError["error"] | 
   }
 }
 
-export default function AssistantChat() {
+export default function AssistantChat({ onSendingChange, onAssistantMessage }: Props) {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [info, setInfo] = useState<AssistantInfo | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -61,6 +70,16 @@ export default function AssistantChat() {
   const [retryUntil, setRetryUntil] = useState<number | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(0);
   const logRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  // Latest callbacks, so effects don't re-run when the parent re-renders.
+  const callbacks = useRef({ onSendingChange, onAssistantMessage });
+  useEffect(() => {
+    callbacks.current = { onSendingChange, onAssistantMessage };
+  });
+
+  useEffect(() => {
+    callbacks.current.onSendingChange?.(sending);
+  }, [sending]);
 
   // Session id and greeting.
   useEffect(() => {
@@ -74,6 +93,7 @@ export default function AssistantChat() {
         if (cancelled) return;
         setInfo(data);
         setMessages([{ id: newId(), role: "assistant", text: data.greeting }]);
+        callbacks.current.onAssistantMessage?.({ text: data.greeting, emotion: "happy" });
       } catch (error) {
         if (cancelled) return;
         const offline = error instanceof TypeError;
@@ -84,6 +104,11 @@ export default function AssistantChat() {
       cancelled = true;
     };
   }, []);
+
+  // Ready to type once connected (not on touch screens: it would pop up the keyboard).
+  useEffect(() => {
+    if (info && window.matchMedia("(pointer: fine)").matches) inputRef.current?.focus();
+  }, [info]);
 
   // Countdown after a 429.
   useEffect(() => {
@@ -128,6 +153,7 @@ export default function AssistantChat() {
           ...current,
           { id: newId(), role: "assistant", text: data.reply, offerContactForm: data.needsContactForm },
         ]);
+        callbacks.current.onAssistantMessage?.({ text: data.reply, emotion: data.emotion });
         return;
       }
 
@@ -152,38 +178,25 @@ export default function AssistantChat() {
   const blocked = !sessionId || sending || Boolean(retryUntil) || !info;
 
   return (
-    <section className="soft-card p-6" aria-labelledby="assistant-title">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h2 id="assistant-title" className="field-label flex items-center gap-2 text-[var(--ink)]">
-            <Bot className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
-            {info?.displayName ?? "Portfolio Assistant"}
-          </h2>
-          <p className="mt-2 text-sm text-[var(--ink-soft)]">
-            Ask about Sashank&apos;s work, projects or background, or leave a message.
-          </p>
-        </div>
-        <span className="chip border-[var(--accent)] text-[var(--accent)]">AI assistant</span>
-      </div>
-
+    <div className="flex h-full min-h-0 flex-col">
       <div
         ref={logRef}
         role="log"
         aria-live="polite"
         aria-label="Conversation with the AI assistant"
-        className="mt-5 max-h-[26rem] min-h-[8rem] space-y-3 overflow-y-auto rounded border border-[var(--line)] bg-white p-4"
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4"
       >
         {messages.length === 0 && !notice && <p className="text-sm text-[var(--ink-soft)]">Connecting to the assistant…</p>}
 
         {messages.map((message) => (
           <div key={message.id} className={message.role === "user" ? "flex justify-end" : "flex justify-start"}>
-            <div className="max-w-[85%]">
+            <div className="max-w-[88%]">
               <p className="mb-1 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
                 {message.role === "user" ? "You" : "AI assistant"}
               </p>
               <p
-                className={`whitespace-pre-wrap rounded border px-3.5 py-2.5 text-sm leading-6 text-[var(--ink)] ${
-                  message.role === "user" ? "border-[var(--accent)] bg-[var(--bg)]" : "border-[var(--line)] bg-[var(--card-bg)]"
+                className={`whitespace-pre-wrap rounded-xl border px-3.5 py-2.5 text-sm leading-6 text-[var(--ink)] ${
+                  message.role === "user" ? "border-[var(--accent)] bg-[var(--bg)]" : "border-[var(--line)] bg-white"
                 }`}
               >
                 {message.text}
@@ -196,12 +209,12 @@ export default function AssistantChat() {
         {sending && <p className="text-sm text-[var(--ink-soft)]">The assistant is thinking…</p>}
 
         {notice && (
-          <p role="status" className="rounded border border-[var(--line)] bg-[var(--card-bg)] px-3.5 py-2.5 text-sm text-[var(--ink)]">
+          <p role="status" className="rounded-xl border border-[var(--line)] bg-white px-3.5 py-2.5 text-sm text-[var(--ink)]">
             {notice.kind === "rate" ? `${notice.text} Please wait ${secondsLeft} second${secondsLeft === 1 ? "" : "s"}.` : notice.text}
             {(notice.kind === "unavailable" || notice.kind === "network") && (
               <>
                 {" "}
-                <a href="#contact-form" className="font-semibold text-[var(--accent)] underline">
+                <a href={CONTACT_FORM_URL} className="font-semibold text-[var(--accent)] underline">
                   Go to the contact form
                 </a>
               </>
@@ -210,48 +223,53 @@ export default function AssistantChat() {
         )}
       </div>
 
-      <form
-        className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void send();
-        }}
-      >
-        <div className="flex-1">
-          <label htmlFor="assistant-input" className="sr-only">
-            Your message to the AI assistant
-          </label>
-          <textarea
-            id="assistant-input"
-            rows={2}
-            maxLength={MAX_MESSAGE_CHARS}
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                void send();
-              }
-            }}
-            placeholder="Ask a question…"
-            className="field resize-none"
-            disabled={!info}
-          />
-          <p className="mt-1 text-right font-mono text-[0.65rem] text-[var(--ink-soft)]">
+      <div className="border-t border-[var(--line)] px-4 pb-3 pt-3">
+        <form
+          className="flex items-end gap-2"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void send();
+          }}
+        >
+          <div className="flex-1">
+            <label htmlFor="assistant-input" className="sr-only">
+              Your message to the AI assistant
+            </label>
+            <textarea
+              ref={inputRef}
+              id="assistant-input"
+              rows={2}
+              maxLength={MAX_MESSAGE_CHARS}
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                  event.preventDefault();
+                  void send();
+                }
+              }}
+              placeholder="Ask a question…"
+              className="field resize-none"
+              disabled={!info}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={blocked || !input.trim()}
+            aria-label={sending ? "Sending" : "Send"}
+            className="btn-primary px-3.5 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Send className="h-4 w-4" aria-hidden="true" />
+          </button>
+        </form>
+        <p className="mt-2 flex justify-between gap-3 text-[0.7rem] leading-4 text-[var(--ink-soft)]">
+          <span>Replies are AI-written from this site and may be incomplete. Please don&apos;t share sensitive information.</span>
+          <span className="shrink-0 font-mono">
             {input.length}/{MAX_MESSAGE_CHARS}
-          </p>
-        </div>
-        <button type="submit" disabled={blocked || !input.trim()} className="btn-primary disabled:cursor-not-allowed disabled:opacity-50 sm:mb-5">
-          {sending ? "Sending…" : "Send"}
-          <Send className="h-4 w-4" aria-hidden="true" />
-        </button>
-      </form>
-
-      <p className="text-xs leading-5 text-[var(--ink-soft)]">
-        Replies are written by an AI using information from this site and may be incomplete. Please don&apos;t share
-        sensitive personal information.
-      </p>
-    </section>
+          </span>
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -321,7 +339,7 @@ function ContactInChat({ sessionId }: { sessionId: string }) {
       setState(
         ok
           ? { kind: "sent", text: "Thanks! Your message is on its way to Sashank." }
-          : { kind: "error", text: "Sorry, the message couldn't be sent. Please use the contact form below." },
+          : { kind: "error", text: "Sorry, the message couldn't be sent. Please use the contact form on the contact page." },
       );
     }
   };
