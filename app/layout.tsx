@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sashank Yeturi",
   description:
-    "Assistant Professor of CSE and full-stack developer based in Rajasthan, India - building CausalBlogs and Orion, and researching AI/ML security and continual learning.",
+    "Assistant Professor of CSE and full-stack developer based in Rajasthan, India - building CausalBlogs and Orion, and researching AI/ML security and Digital Character AI.",
 };
 
 export default function RootLayout({

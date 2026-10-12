@@ -167,7 +167,7 @@ const experiences = [
     highlights: [
       "Faculty role covering undergraduate and polytechnic-level CS coursework",
       "Building curriculum and notes content for web development essentials",
-      "Research direction in AI/ML security and continual learning",
+      "Research direction in AI/ML security and Digital Character AI",
     ],
   },
   {
@@ -195,13 +195,13 @@ const experiences = [
 const focusAreas = [
   {
     num: "01",
-    label: "Continual Learning",
-    desc: "Exploring how AI can learn from new experience while retaining prior knowledge.",
+    label: "Digital Character AI",
+    desc: "Exploring AI-driven characters that converse, express emotion, and act inside real interfaces.",
   },
   {
     num: "02",
     label: "AI / ML Security",
-    desc: "Investigating the reliability and security of learning systems as they evolve.",
+    desc: "Investigating the reliability and security of AI systems as they evolve.",
   },
   {
     num: "03",
@@ -218,17 +218,17 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <span className="research-status inline-flex items-center gap-2 border border-[var(--line)] px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
               <span className="h-1.5 w-1.5 bg-[var(--accent-warm)]" />
-              AI Research / Continual Learning
+              AI Research / Digital Character AI
             </span>
             <h1 className="gradient-text mt-7 text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
               Yeturi Trilochan Sashank
             </h1>
             <p className="mt-4 max-w-xl text-xl font-semibold text-[var(--accent)]">
-              Researching systems that keep learning.
+              Researching AI characters that feel alive.
             </p>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--ink-soft)] sm:text-lg">
-              I?m an Assistant Professor of CSE and full-stack developer exploring
-              continual learning and AI/ML security. I connect research, teaching,
+              I&apos;m an Assistant Professor of CSE and full-stack developer exploring
+              Digital Character AI and AI/ML security. I connect research, teaching,
               and practice through the systems I build.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-[var(--ink-soft)]">
@@ -257,7 +257,7 @@ export default function HomePage() {
           <div className="soft-card focus-panel p-5">
             <div className="p-3 sm:p-5">
               <p className="kicker">Research notebook</p>
-              <h2 className="research-question mt-5">How can AI adapt<br />without forgetting?</h2>
+              <h2 className="research-question mt-5">How can AI characters feel alive<br />and stay grounded?</h2>
               <div className="mt-6 space-y-4">
                 {focusAreas.map((item) => (
                   <div key={item.label} className="border-t border-[var(--line)] pt-4">
@@ -267,10 +267,10 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              <div className="learning-cycle" aria-label="Continual learning cycle">
-                <span>Learn</span><ArrowRight className="h-3 w-3" aria-hidden="true" />
-                <span>Retain</span><ArrowRight className="h-3 w-3" aria-hidden="true" />
-                <span>Adapt</span>
+              <div className="learning-cycle" aria-label="Digital character loop">
+                <span>Converse</span><ArrowRight className="h-3 w-3" aria-hidden="true" />
+                <span>Express</span><ArrowRight className="h-3 w-3" aria-hidden="true" />
+                <span>Act</span>
               </div>
             </div>
           </div>
