@@ -6,7 +6,7 @@
 
 import { isIP } from "node:net";
 
-import type { AssistantError, AssistantErrorCode } from "./types.ts";
+import { cleanNavigation, isSitePath, type AssistantError, type AssistantErrorCode } from "./types.ts";
 
 export const CHARACTER_ID = "portfolio-contact";
 const MAX_BODY_CHARS = 16_000;
@@ -112,7 +112,11 @@ async function callService(
 }
 
 /** Turn the service's response into one for the browser, exposing only known-safe fields. */
-async function mapResponse(upstream: Response | null, okFields: string[]): Promise<Response> {
+async function mapResponse(
+  upstream: Response | null,
+  okFields: string[],
+  extend?: (payload: unknown) => Record<string, unknown>,
+): Promise<Response> {
   if (!upstream) return unavailable();
 
   let payload: unknown = null;
@@ -124,7 +128,7 @@ async function mapResponse(upstream: Response | null, okFields: string[]): Promi
 
   if (upstream.ok) {
     const data = pick(payload, okFields);
-    return data ? json(data, upstream.status) : unavailable();
+    return data ? json({ ...data, ...extend?.(payload) }, upstream.status) : unavailable();
   }
 
   const upstreamError = (payload as { error?: { code?: unknown; message?: unknown } } | null)?.error;
@@ -137,6 +141,11 @@ async function mapResponse(upstream: Response | null, okFields: string[]): Promi
     }
     case 429: {
       const retryAfter = Math.max(1, Number.parseInt(upstream.headers.get("retry-after") ?? "", 10) || 30);
+      if (upstreamError?.code === "quota_exceeded") {
+        // The day's questions are used up. The message is the owner's text from character.yaml.
+        const message = str(upstreamError.message)?.slice(0, 300) || "Your quota for today is up. Please come back tomorrow.";
+        return errorResponse(429, "quota_exceeded", message, { retryAfter }, { "Retry-After": String(retryAfter) });
+      }
       return errorResponse(
         429,
         "rate_limited",
@@ -180,12 +189,18 @@ export async function handleChat(request: Request, env: Env = process.env, fetch
   if (!sessionId || !SESSION_ID_RE.test(sessionId) || !message?.trim() || message.length > 4000) {
     return errorResponse(400, "invalid_request", "The request is invalid.");
   }
+  // The page the visitor is on; only a plain path on this site is forwarded.
+  const currentPath = str(body?.currentPath);
 
   const config = configOrUnavailable(env);
   if (config instanceof Response) return config;
   // Only these fields are forwarded; anything else in the body is dropped.
-  const upstream = await callService(config, "/chat", request, { sessionId, message }, fetchImpl);
-  return mapResponse(upstream, ["reply", "emotion", "intent", "needsContactForm"]);
+  const forwarded = { sessionId, message, ...(isSitePath(currentPath) ? { currentPath } : {}) };
+  const upstream = await callService(config, "/chat", request, forwarded, fetchImpl);
+  // navigation is optional (an older service doesn't send it) and is re-checked here.
+  return mapResponse(upstream, ["reply", "emotion", "intent", "needsContactForm"], (payload) => ({
+    navigation: cleanNavigation((payload as { navigation?: unknown }).navigation),
+  }));
 }
 
 /** POST /api/assistant/contact: { sessionId, name, email, message, honeypot } */

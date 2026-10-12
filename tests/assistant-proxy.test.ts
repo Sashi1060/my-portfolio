@@ -92,7 +92,7 @@ describe("the API key never reaches the browser", () => {
   test("unknown fields from the service are not passed on", async () => {
     const { fetchImpl } = fakeService(ok({ ...chatReply, internal: "secret" }));
     const response = await handleChat(browserRequest("/api/assistant/chat", { sessionId: SESSION, message: "hi" }), ENV, fetchImpl);
-    assert.deepEqual(await response.json(), chatReply);
+    assert.deepEqual(await response.json(), { ...chatReply, navigation: null });
   });
 
   test("no browser-side code reads the key or imports the server module", () => {
@@ -176,6 +176,21 @@ describe("error mapping", () => {
   test("429 without Retry-After defaults to 30 seconds", async () => {
     const body = await (await send(ok({}, 429))).json();
     assert.equal(body.error.retryAfter, 30);
+  });
+
+  test("used-up daily quota passes the service's message and the wait until tomorrow", async () => {
+    const message = "Your quota for today is up. Please come back tomorrow.";
+    const response = await send(ok({ error: { code: "quota_exceeded", message } }, 429, { "Retry-After": "40000" }));
+    assert.equal(response.status, 429);
+    assert.equal(response.headers.get("retry-after"), "40000");
+    assert.deepEqual((await response.json()).error, { code: "quota_exceeded", message, retryAfter: 40000 });
+  });
+
+  test("quota message falls back to a default and is length-capped", async () => {
+    const blank = await (await send(ok({ error: { code: "quota_exceeded", message: "" } }, 429))).json();
+    assert.equal(blank.error.message, "Your quota for today is up. Please come back tomorrow.");
+    const long = await (await send(ok({ error: { code: "quota_exceeded", message: "x".repeat(5000) } }, 429))).json();
+    assert.equal(long.error.message.length, 300);
   });
 
   test("422 passes the service's message", async () => {
@@ -302,5 +317,56 @@ describe("route module", () => {
     assert.equal(response.status, 200);
     assert.equal(calls[0].url, "http://service.test/v1/characters/portfolio-contact/chat");
     assert.equal(calls[0].headers.get("x-visitor-ip"), "198.51.100.9");
+  });
+});
+
+describe("navigation (opening pages)", () => {
+  const send = (upstreamBody: unknown, requestBody: Record<string, unknown> = {}) => {
+    const service = fakeService(ok(upstreamBody));
+    const response = handleChat(
+      browserRequest("/api/assistant/chat", { sessionId: SESSION, message: "Take me to his publications", ...requestBody }),
+      ENV,
+      service.fetchImpl,
+    );
+    return { response, calls: service.calls };
+  };
+
+  test("a valid navigation passes through", async () => {
+    const navigation = { path: "/publications", label: "Publications", mode: "auto" };
+    const body = await (await send({ ...chatReply, navigation }).response).json();
+    assert.deepEqual(body.navigation, navigation);
+  });
+
+  test("an older service without navigation still works (navigation is null)", async () => {
+    const response = await send(chatReply).response;
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).navigation, null);
+  });
+
+  for (const [name, navigation] of [
+    ["another site", { path: "https://evil.example", label: "x", mode: "auto" }],
+    ["protocol-relative", { path: "//evil.example", label: "x", mode: "auto" }],
+    ["javascript:", { path: "javascript:alert(1)", label: "x", mode: "auto" }],
+    ["query string", { path: "/projects?next=https://evil.example", label: "x", mode: "auto" }],
+    ["unknown mode", { path: "/projects", label: "Projects", mode: "always" }],
+    ["empty label", { path: "/projects", label: " ", mode: "auto" }],
+    ["not an object", "/projects"],
+  ] as const) {
+    test(`an unsafe or malformed navigation is dropped: ${name}`, async () => {
+      const body = await (await send({ ...chatReply, navigation }).response).json();
+      assert.equal(body.navigation, null);
+    });
+  }
+
+  test("the current page is forwarded only when it is a plain site path", async () => {
+    const good = send(chatReply, { currentPath: "/about" });
+    await good.response;
+    assert.deepEqual(good.calls[0].body, { sessionId: SESSION, message: "Take me to his publications", currentPath: "/about" });
+
+    for (const currentPath of ["https://evil.example", "/About Me", 42, "/a?b=c"]) {
+      const bad = send(chatReply, { currentPath });
+      await bad.response;
+      assert.deepEqual(bad.calls[0].body, { sessionId: SESSION, message: "Take me to his publications" });
+    }
   });
 });

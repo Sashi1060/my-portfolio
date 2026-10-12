@@ -33,6 +33,8 @@ type Props = {
   talkUntil: number;
   /** False while the widget is closed: rendering pauses. */
   active: boolean;
+  /** The teleport pose: two fingers to the forehead, eyes closed. */
+  posing?: boolean;
   onStatus: (status: AvatarStatus, progress?: number) => void;
 };
 
@@ -44,11 +46,55 @@ const AIM_HEIGHT = 0.03;
 // Upper arms lowered from the T-pose the model is exported in.
 const ARM_DOWN = 1.2;
 
-export default function AvatarStage({ modelUrl, mood, thinking, talkUntil, active, onStatus }: Props) {
+// Teleport pose, as directions in the model's own space (it faces +Z; its right hand is at -X).
+// Elbow out to the side and forward, forearm rising, wrist bent so the two straight fingers
+// point up to the right side of the forehead (not across the face).
+const POSE_UPPER_ARM = new THREE.Vector3(-0.55, -0.2, 0.8).normalize();
+const POSE_FOREARM = new THREE.Vector3(0.62, 0.77, -0.12).normalize();
+const POSE_HAND = new THREE.Vector3(0.08, 0.98, -0.18).normalize();
+const REST_RIGHT_ARM = new THREE.Vector3(-1, 0, 0);
+// Ring and little fingers and the thumb fold in; index and middle stay straight.
+const FOLDED_FINGERS = [
+  "rightRingProximal",
+  "rightRingIntermediate",
+  "rightRingDistal",
+  "rightLittleProximal",
+  "rightLittleIntermediate",
+  "rightLittleDistal",
+  "rightThumbProximal",
+  "rightThumbDistal",
+] as const;
+const FINGER_FOLD = 1.1;
+
+type PoseBone = { node: THREE.Object3D; rest: THREE.Quaternion; target: THREE.Quaternion };
+
+/** Rest and target rotations for every bone the teleport pose moves. */
+function buildTeleportPose(vrm: VRM): PoseBone[] {
+  const humanoid = vrm.humanoid;
+  const bones: PoseBone[] = [];
+  const add = (name: Parameters<typeof humanoid.getNormalizedBoneNode>[0], rest: THREE.Quaternion, target: THREE.Quaternion) => {
+    const node = humanoid.getNormalizedBoneNode(name);
+    if (node) bones.push({ node, rest, target });
+  };
+
+  const upper = new THREE.Quaternion().setFromUnitVectors(REST_RIGHT_ARM, POSE_UPPER_ARM);
+  const forearmInUpperSpace = POSE_FOREARM.clone().applyQuaternion(upper.clone().invert());
+  const lower = new THREE.Quaternion().setFromUnitVectors(REST_RIGHT_ARM, forearmInUpperSpace);
+  const handInLowerSpace = POSE_HAND.clone().applyQuaternion(upper.clone().multiply(lower).invert());
+  const hand = new THREE.Quaternion().setFromUnitVectors(REST_RIGHT_ARM, handInLowerSpace);
+  add("rightUpperArm", new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, ARM_DOWN)), upper);
+  add("rightLowerArm", new THREE.Quaternion(), lower);
+  add("rightHand", new THREE.Quaternion(), hand);
+  const fold = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, FINGER_FOLD));
+  for (const finger of FOLDED_FINGERS) add(finger, new THREE.Quaternion(), fold);
+  return bones;
+}
+
+export default function AvatarStage({ modelUrl, mood, thinking, talkUntil, active, posing = false, onStatus }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   // The render loop reads the latest props through refs, so it never restarts.
-  const live = useRef({ mood, thinking, talkUntil, active, onStatus });
-  live.current = { mood, thinking, talkUntil, active, onStatus };
+  const live = useRef({ mood, thinking, talkUntil, active, posing, onStatus });
+  live.current = { mood, thinking, talkUntil, active, posing, onStatus };
   const wakeRef = useRef<() => void>(() => {});
 
   useEffect(() => {
@@ -104,6 +150,8 @@ export default function AvatarStage({ modelUrl, mood, thinking, talkUntil, activ
     const face: Record<string, number> = { happy: 0, sad: 0, relaxed: 0, surprised: 0 };
     const mouth: Record<string, number> = { aa: 0, ih: 0, ou: 0, ee: 0, oh: 0 };
     let thinkingWeight = 0;
+    let poseWeight = 0;
+    let poseBones: PoseBone[] = [];
     let blinkAt = nextBlinkDelay();
     let talkStartedFor = 0;
     let talkStart = 0;
@@ -126,7 +174,10 @@ export default function AvatarStage({ modelUrl, mood, thinking, talkUntil, activ
         blink = blinkWeight(elapsed - blinkAt);
         if (blink === 0 && elapsed - blinkAt > 0.2) blinkAt = elapsed + nextBlinkDelay();
       }
-      expressions?.setValue("blink", canBlink(face.happy) ? blink : 0);
+      // Eyes close while holding the teleport pose (concentrating).
+      poseWeight = approach(poseWeight, state.posing ? 1 : 0, dt, 9);
+      const eyes = canBlink(face.happy) ? blink : 0;
+      expressions?.setValue("blink", Math.max(eyes, poseWeight));
 
       // Mouth: moves while a reply is "being said".
       const now = Date.now();
@@ -143,9 +194,10 @@ export default function AvatarStage({ modelUrl, mood, thinking, talkUntil, activ
 
       // Head, breathing and gaze.
       thinkingWeight = approach(thinkingWeight, state.thinking || state.mood === "thinking" ? 1 : 0, dt, 4);
-      const pose = headPose(elapsed, thinkingWeight);
+      const pose = headPose(elapsed, thinkingWeight * (1 - poseWeight));
       const head = vrm.humanoid.getNormalizedBoneNode("head");
-      head?.rotation.set(pose.pitch, pose.yaw, pose.roll);
+      head?.rotation.set(pose.pitch + 0.04 * poseWeight, pose.yaw * (1 - poseWeight), pose.roll * (1 - poseWeight));
+      for (const bone of poseBones) bone.node.quaternion.slerpQuaternions(bone.rest, bone.target, poseWeight);
       const neck = vrm.humanoid.getNormalizedBoneNode("neck");
       neck?.rotation.set(pose.pitch * 0.4, pose.yaw * 0.4, pose.roll * 0.3);
       const chest = vrm.humanoid.getNormalizedBoneNode("chest");
@@ -217,6 +269,7 @@ export default function AvatarStage({ modelUrl, mood, thinking, talkUntil, activ
         const humanoid = loaded.humanoid;
         humanoid.getNormalizedBoneNode("leftUpperArm")?.rotation.set(0, 0, -ARM_DOWN);
         humanoid.getNormalizedBoneNode("rightUpperArm")?.rotation.set(0, 0, ARM_DOWN);
+        poseBones = buildTeleportPose(loaded);
         loaded.update(0);
         scene.add(loaded.scene);
 

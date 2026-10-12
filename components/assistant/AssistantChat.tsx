@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Send } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { CornerDownRight, Send, Sparkles } from "lucide-react";
 
 import { submitToFormsubmit } from "@/lib/formsubmit";
 import {
@@ -10,6 +11,7 @@ import {
   type AssistantEmotion,
   type AssistantError,
   type AssistantInfo,
+  type AssistantNavigation,
   type AssistantReply,
 } from "@/lib/assistant/types";
 
@@ -18,6 +20,9 @@ type ChatMessage = {
   role: "assistant" | "user";
   text: string;
   offerContactForm?: boolean;
+  // A page the reply relates to: a button ("offer") or a note once opened.
+  navigation?: AssistantNavigation;
+  navigated?: boolean;
 };
 
 type Notice = { kind: "rate" | "unavailable" | "network" | "invalid"; text: string };
@@ -30,7 +35,9 @@ type Props = {
   /** True while waiting for a reply (the avatar shows "thinking"). */
   onSendingChange?: (sending: boolean) => void;
   /** Called for the greeting and every reply (the avatar reacts). */
-  onAssistantMessage?: (message: { text: string; emotion: AssistantEmotion }) => void;
+  onAssistantMessage?: (message: { text: string; emotion: AssistantEmotion; navigating?: boolean }) => void;
+  /** Open a page of the site (the widget plays the teleport). */
+  onNavigate?: (navigation: AssistantNavigation) => void;
 };
 
 function newId(): string {
@@ -60,7 +67,8 @@ async function readError(response: Response): Promise<AssistantError["error"] | 
   }
 }
 
-export default function AssistantChat({ onSendingChange, onAssistantMessage }: Props) {
+export default function AssistantChat({ onSendingChange, onAssistantMessage, onNavigate }: Props) {
+  const pathname = usePathname();
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [info, setInfo] = useState<AssistantInfo | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -69,12 +77,15 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage }: P
   const [notice, setNotice] = useState<Notice | null>(null);
   const [retryUntil, setRetryUntil] = useState<number | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(0);
+  // Today's questions are used up: the input stays locked for this page view (the service
+  // refuses further questions until its quota day starts over anyway).
+  const [quotaReached, setQuotaReached] = useState(false);
   const logRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   // Latest callbacks, so effects don't re-run when the parent re-renders.
-  const callbacks = useRef({ onSendingChange, onAssistantMessage });
+  const callbacks = useRef({ onSendingChange, onAssistantMessage, onNavigate });
   useEffect(() => {
-    callbacks.current = { onSendingChange, onAssistantMessage };
+    callbacks.current = { onSendingChange, onAssistantMessage, onNavigate };
   });
 
   useEffect(() => {
@@ -133,7 +144,7 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage }: P
 
   const send = useCallback(async () => {
     const text = input.trim();
-    if (!text || !sessionId || sending || retryUntil) return;
+    if (!text || !sessionId || sending || retryUntil || quotaReached) return;
 
     setMessages((current) => [...current, { id: newId(), role: "user", text }]);
     setInput("");
@@ -144,21 +155,37 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage }: P
       const response = await fetch("/api/assistant/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, message: text }),
+        body: JSON.stringify({ sessionId, message: text, currentPath: pathname }),
       });
 
       if (response.ok) {
         const data = (await response.json()) as AssistantReply;
+        const navigation = data.navigation ?? undefined;
+        const going = navigation?.mode === "auto" && Boolean(callbacks.current.onNavigate);
         setMessages((current) => [
           ...current,
-          { id: newId(), role: "assistant", text: data.reply, offerContactForm: data.needsContactForm },
+          {
+            id: newId(),
+            role: "assistant",
+            text: data.reply,
+            offerContactForm: data.needsContactForm,
+            navigation,
+            navigated: going,
+          },
         ]);
-        callbacks.current.onAssistantMessage?.({ text: data.reply, emotion: data.emotion });
+        callbacks.current.onAssistantMessage?.({ text: data.reply, emotion: data.emotion, navigating: going });
+        if (going && navigation) callbacks.current.onNavigate?.(navigation);
         return;
       }
 
       const error = await readError(response);
-      if (response.status === 429) {
+      if (response.status === 429 && error?.code === "quota_exceeded") {
+        // Shown as the assistant's own reply.
+        const reply = error.message;
+        setMessages((current) => [...current, { id: newId(), role: "assistant", text: reply }]);
+        callbacks.current.onAssistantMessage?.({ text: reply, emotion: "apologetic" });
+        setQuotaReached(true);
+      } else if (response.status === 429) {
         const wait = error?.retryAfter ?? (Number(response.headers.get("Retry-After")) || 30);
         setRetryUntil(Date.now() + wait * 1000);
         setNotice({ kind: "rate", text: "You're sending messages quickly." });
@@ -172,10 +199,15 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage }: P
     } finally {
       setSending(false);
     }
-  }, [input, sessionId, sending, retryUntil]);
+  }, [input, sessionId, sending, retryUntil, quotaReached, pathname]);
+
+  const teleport = (id: string, navigation: AssistantNavigation) => {
+    setMessages((current) => current.map((m) => (m.id === id ? { ...m, navigated: true } : m)));
+    callbacks.current.onNavigate?.({ ...navigation, mode: "auto" });
+  };
 
   const latestFormId = [...messages].reverse().find((m) => m.offerContactForm)?.id;
-  const blocked = !sessionId || sending || Boolean(retryUntil) || !info;
+  const blocked = !sessionId || sending || Boolean(retryUntil) || !info || quotaReached;
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -201,12 +233,38 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage }: P
               >
                 {message.text}
               </p>
+              {message.navigation && message.navigated && (
+                <p className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--ink-soft)]">
+                  <CornerDownRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  Opened {message.navigation.label}
+                </p>
+              )}
+              {message.navigation && !message.navigated && onNavigate && message.navigation.path !== pathname && (
+                <button
+                  type="button"
+                  onClick={() => message.navigation && teleport(message.id, message.navigation)}
+                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-[var(--accent)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--accent)] transition hover:bg-[var(--bg)]"
+                >
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                  Teleport to {message.navigation.label}
+                </button>
+              )}
               {message.id === latestFormId && sessionId && <ContactInChat sessionId={sessionId} />}
             </div>
           </div>
         ))}
 
         {sending && <p className="text-sm text-[var(--ink-soft)]">The assistant is thinking…</p>}
+
+        {quotaReached && (
+          <p role="status" className="rounded-xl border border-[var(--line)] bg-white px-3.5 py-2.5 text-sm text-[var(--ink)]">
+            You can still reach Sashank any time with the{" "}
+            <a href={CONTACT_FORM_URL} className="font-semibold text-[var(--accent)] underline">
+              contact form
+            </a>
+            .
+          </p>
+        )}
 
         {notice && (
           <p role="status" className="rounded-xl border border-[var(--line)] bg-white px-3.5 py-2.5 text-sm text-[var(--ink)]">
@@ -248,9 +306,9 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage }: P
                   void send();
                 }
               }}
-              placeholder="Ask a question…"
-              className="field resize-none"
-              disabled={!info}
+              placeholder={quotaReached ? "You can ask more questions tomorrow." : "Ask a question…"}
+              className="field resize-none disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={!info || quotaReached}
             />
           </div>
           <button

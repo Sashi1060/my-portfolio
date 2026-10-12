@@ -232,3 +232,46 @@ svg { flex-shrink: 0; }
 .learning-cycle { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-family: var(--font-geist-mono), monospace; font-size: 11px; color: var(--accent); }
 .learning-cycle span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: rgb(133 177 242 / 7%); }
 @media (max-width: 639px) { .hero-gradient .page-shell { padding-top: 48px; padding-bottom: 48px; } }
+
+/* Assistant "teleport": Buu vanishes from the panel, the page changes, Buu reappears. */
+@keyframes buu-vanish {
+  0% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+  30% { transform: scale(1.04, 1.04); filter: brightness(2) saturate(1.3); opacity: 1; }
+  45% { opacity: 0.55; }
+  55% { opacity: 1; }
+  75% { transform: scale(0.14, 1.12); filter: brightness(3.5); opacity: 1; }
+  100% { transform: scale(0, 1.3); filter: brightness(4); opacity: 0; }
+}
+@keyframes buu-appear {
+  0% { transform: scale(0, 1.3); filter: brightness(4); opacity: 0; }
+  35% { transform: scale(0.16, 1.12); filter: brightness(3.2); opacity: 1; }
+  70% { transform: scale(1.05, 0.98); filter: brightness(1.6); }
+  100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+}
+@keyframes buu-flash {
+  0%, 100% { opacity: 0; }
+  60% { opacity: 1; }
+}
+@keyframes teleport-wipe {
+  0% { opacity: 0; }
+  35% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes buu-land {
+  0% { transform: scale(0.2); filter: brightness(3); }
+  60% { transform: scale(1.15); filter: brightness(1.6); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+.buu-vanish { transform-origin: 50% 55%; animation: buu-vanish 380ms ease-in forwards; }
+.buu-appear { transform-origin: 50% 55%; animation: buu-appear 520ms ease-out both; }
+.buu-flash {
+  background: radial-gradient(ellipse at 50% 50%, rgb(255 255 255 / 95%) 0%, rgb(172 214 255 / 55%) 22%, transparent 55%);
+  animation: buu-flash 420ms ease-out forwards;
+}
+.teleport-wipe {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 46px, rgb(255 255 255 / 22%) 46px 48px),
+    radial-gradient(ellipse at 88% 82%, rgb(255 255 255 / 85%) 0%, rgb(138 203 255 / 35%) 30%, transparent 70%);
+  animation: teleport-wipe 520ms ease-out forwards;
+}
+.buu-land { animation: buu-land 520ms ease-out both; }
