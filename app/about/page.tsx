@@ -68,10 +68,10 @@ const education = [
 ];
 
 const skillGroups = [
-  { title: "Languages", skills: ["JavaScript", "TypeScript", "Python", "Core Java", "HTML5", "CSS3"] },
-  { title: "Frontend", skills: ["React", "Next.js", "Tailwind CSS", "Bootstrap"] },
+  { title: "Programming Languages", skills: ["JavaScript", "TypeScript", "Python", "Core Java"] },
+  { title: "Frontend", skills: ["HTML5", "CSS3", "React", "Next.js", "Tailwind CSS", "Bootstrap"] },
   { title: "Backend", skills: ["Node.js", "Express.js", "FastAPI", "Django"] },
-  { title: "Data", skills: ["PostgreSQL", "Redis", "MongoDB", "MySQL"] },
+  { title: "Databases & Data Stores", skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis"] },
   { title: "Tools", skills: ["Git", "Docker", "Vercel", "Streamlit", "Postman", "Linux / WSL"] },
   { title: "Foundations", skills: ["DSA", "System Design", "Networking"] },
 ];
