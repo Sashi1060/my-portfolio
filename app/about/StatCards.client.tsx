@@ -4,11 +4,12 @@
 import React, { memo } from "react";
 import { useReducedMotion, motion } from "framer-motion";
 import { Briefcase, Code, Cpu } from "lucide-react";
+import ProfessionalExperience from "@/components/site/ProfessionalExperience";
 
 type CardProps = {
     icon: React.ReactNode;
     title: string;
-    value: string;
+    value: React.ReactNode;
     rotate?: number;
 };
 
@@ -43,7 +44,7 @@ export default function StatCards() {
             <Card
                 icon={<Briefcase className="mx-auto h-10 w-10 text-[var(--accent)] sm:h-12 sm:w-12" />}
                 title="Experience"
-                value="1+ Year"
+                value={<ProfessionalExperience />}
                 rotate={-3}
             />
             <Card

@@ -1,4 +1,5 @@
 import CultivationRealm from "@/components/site/CultivationRealm";
+import ProfessionalExperience from "@/components/site/ProfessionalExperience";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -77,7 +78,7 @@ const skillGroups = [
 ];
 
 const stats = [
-  { label: "Years of experience", value: "1+" },
+  { label: "Professional experience", value: <ProfessionalExperience compact /> },
   { label: "Projects shipped", value: "10+" },
   { label: "Research focus", value: "AI/ML Security" },
 ];
