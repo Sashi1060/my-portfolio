@@ -275,3 +275,74 @@ svg { flex-shrink: 0; }
   animation: teleport-wipe 520ms ease-out forwards;
 }
 .buu-land { animation: buu-land 520ms ease-out both; }
+
+/* A procedural cultivation realm: jade mountains, celestial gold, drifting qi. */
+.cultivation-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  --accent: #a5edd6;
+  --accent-warm: #e7c885;
+  --ink: #f0f7ee;
+  --ink-soft: #b7d2ce;
+  --line: rgb(177 222 204 / 20%);
+  background: #07171f;
+}
+.cultivation-hero > .page-shell { position: relative; z-index: 1; padding-top: 100px; padding-bottom: 110px; }
+.cultivation-realm { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse at 70% 10%, #1b4950 0%, transparent 56%), linear-gradient(150deg, #060f1b, #0c282b 75%, #163d3c); }
+.cultivation-realm::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(5 17 23 / 75%), transparent 85%), linear-gradient(0deg, #071922, transparent 30%); }
+.realm-aurora { position: absolute; width: 80%; height: 55%; border-radius: 50%; filter: blur(65px); opacity: .3; animation: realm-breathe 14s ease-in-out infinite alternate; }
+.realm-aurora-one { right: -20%; top: -25%; background: conic-gradient(from 30deg, transparent, #62dcb8, transparent, #7697b4, transparent); transform: rotate(-25deg); }
+.realm-aurora-two { left: 25%; bottom: -40%; background: #56c5a4; animation-delay: -7s; }
+.realm-moon { position: absolute; top: 7%; right: 12%; width: clamp(90px, 12vw, 170px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fffce2, #dfdab0 65%, #8aa8a0); box-shadow: 0 0 45px #c8e5c52b, 0 0 130px #7acead30; opacity: .8; }
+.realm-mountains { position: absolute; bottom: 0; width: 100%; height: 75%; }
+.realm-mist { position: absolute; width: 130%; left: -15%; height: 160px; border-radius: 50%; filter: blur(35px); background: linear-gradient(90deg, transparent, #9ddbc72b, #d2e8d230, transparent); animation: realm-mist 26s ease-in-out infinite alternate; }
+.realm-mist-one { bottom: 8%; }
+.realm-mist-two { bottom: 30%; opacity: .4; animation-delay: -12s; }
+.realm-seal { position: absolute; width: min(65vw, 720px); aspect-ratio: 1; right: -10%; top: 12%; opacity: .45; }
+.seal-orbit { position: absolute; border-radius: 50%; border: 1px solid #e7c88580; box-shadow: 0 0 22px #a5edd61a, inset 0 0 22px #a5edd615; animation: realm-turn 90s linear infinite; }
+.seal-orbit-outer { inset: 0; border: 2px dashed #e7c88560; outline: 1px solid #a5edd630; outline-offset: 14px; }
+.seal-orbit-inner { inset: 12%; border-top: 3px solid #e7c885; border-bottom: 3px solid #a5edd6; animation-direction: reverse; animation-duration: 65s; }
+.seal-diamond { position: absolute; inset: 23%; border: 1px solid #e7c88580; transform: rotate(45deg); box-shadow: 0 0 0 20px #a5edd608; }
+.seal-core { position: absolute; inset: 35%; border-radius: 50%; background: radial-gradient(circle, #ebffe0, #7cdcb055 12%, transparent 65%); animation: realm-breathe 6s ease-in-out infinite alternate; }
+.seal-star { position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; background: #f0d89e; transform: rotate(var(--angle)) translateY(clamp(-345px, -30vw, -100px)) rotate(45deg); box-shadow: 0 0 15px #f1d596; }
+.realm-mote { position: absolute; z-index: 1; width: 3px; height: 3px; border-radius: 50%; background: #ffe2a1; box-shadow: 0 0 9px 2px #e1bc6860; animation: realm-rise 16s linear infinite; }
+.realm-mote:nth-of-type(3n) { width: 2px; height: 2px; background: #a5edd6; }
+.realm-motion-control { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 17px; border: 1px solid #d5c18d40; border-radius: 100px; background: #091c24d9; color: #ddcd9f; font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; backdrop-filter: blur(12px); }
+.realm-motion-control:hover { border-color: #e7c885; background: #143731; }
+.realm-paused *, .realm-paused::before, .realm-paused::after { animation-play-state: paused !important; }
+.realm-introduction { animation: realm-arrive 1s ease-out both; }
+.cultivation-hero .gradient-text { background-image: linear-gradient(120deg, #fffbea, #e9edd5 50%, #94d9bf); text-shadow: 0 0 55px #d5d79712; }
+.cultivation-hero .research-status { color: #e7d19e; border-color: #e7c88540; background: #d8b7630c; }
+.cultivation-hero .research-status > span { background: #b9e8c3; box-shadow: 0 0 12px #a5edd6; }
+.cultivation-hero .btn-primary { color: #132921; background: linear-gradient(120deg, #f0dfb2, #b1d6b1); box-shadow: 0 0 25px #d9c18020, inset 0 1px 0 #fff8; transition: transform .25s, box-shadow .25s; }
+.cultivation-hero .btn-primary:hover { background: linear-gradient(120deg, #fff2cc, #c3f0d4); transform: translateY(-3px); box-shadow: 0 8px 35px #b8e3b935; }
+.cultivation-hero .btn-secondary { border-color: #a5edd640; }
+.cultivation-hero .realm-research { position: relative; border: 1px solid #d4c28b50; border-radius: 4px 30px 4px 30px; background: linear-gradient(145deg, #102d2de8, #0b1e26ed); box-shadow: inset 0 1px 0 #f5df9e30, 0 25px 75px #0005, 0 0 65px #91d8b50a; backdrop-filter: blur(16px); animation: realm-arrive 1.2s .15s ease-out both; }
+.realm-research::before, .realm-research::after { content: "✦"; position: absolute; color: #e7c885; font-size: 20px; line-height: 1; text-shadow: 0 0 15px #e7c88580; }
+.realm-research::before { top: -10px; left: -9px; }
+.realm-research::after { bottom: -10px; right: -9px; }
+.realm-research .kicker { color: #d9c68d; }
+.realm-research .kicker::before { background: linear-gradient(90deg, #e7c885, #a5edd6); }
+.realm-research .space-y-4 > div { position: relative; padding-left: 12px; transition: background .3s, transform .3s; }
+.realm-research .space-y-4 > div:hover { transform: translateX(4px); background: linear-gradient(90deg, #a5edd60b, transparent); }
+.realm-research .learning-cycle span { border-color: #b4d1ac30; color: #d6e7bf; background: #b4d1ac0a; }
+.cultivation-home > section:not(.cultivation-hero) .soft-card-hover:hover { border-color: #709d86; box-shadow: 0 15px 40px #225b4420; }
+.cultivation-home .gradient-band { background: radial-gradient(ellipse at 85% 100%, #3d6350, transparent 60%), linear-gradient(120deg, #091f24, #16342e); }
+@keyframes realm-turn { to { transform: rotate(360deg); } }
+@keyframes realm-breathe { from { opacity: .2; scale: .95; } to { opacity: .55; scale: 1.08; } }
+@keyframes realm-mist { from { transform: translateX(-4%); } to { transform: translateX(9%); } }
+@keyframes realm-rise { 0% { opacity: 0; transform: translate3d(0, 80px, 0); } 20%, 70% { opacity: .75; } 100% { opacity: 0; transform: translate3d(var(--drift), -180px, 0); } }
+@keyframes realm-arrive { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 639px) {
+  .cultivation-hero > .page-shell { padding-top: 70px; padding-bottom: 95px; }
+  .realm-seal { width: 115vw; top: 10%; right: -55%; opacity: .25; }
+  .realm-moon { top: 25px; right: 20px; width: 95px; opacity: .4; }
+  .realm-aurora { filter: blur(35px); }
+  .realm-mote:nth-of-type(even) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cultivation-realm *, .realm-introduction, .cultivation-hero .realm-research { animation: none !important; }
+  .realm-motion-control { display: none; }
+  .realm-research .space-y-4 > div:hover, .cultivation-hero .btn-primary:hover { transform: none; }
+}

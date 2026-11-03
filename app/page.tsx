@@ -10,6 +10,7 @@ import {
   type BlogPost,
 } from "@/lib/blogApi";
 import { fetchProjects, type PortfolioProject } from "@/lib/portfolioApi";
+import CultivationRealm from "@/components/site/CultivationRealm";
 
 function formatDate(value?: string | null) {
   if (!value) return null;
@@ -167,7 +168,7 @@ const experiences = [
     highlights: [
       "Faculty role covering undergraduate and polytechnic-level CS coursework",
       "Building curriculum and notes content for web development essentials",
-      "Research direction in AI/ML security and Digital Character AI",
+      "Research interests in AI/ML security, Digital Character AI, and Linguistic Stenography",
     ],
   },
   {
@@ -205,6 +206,11 @@ const focusAreas = [
   },
   {
     num: "03",
+    label: "Linguistic Stenography",
+    desc: "Exploring language, shorthand, and compact forms of written communication.",
+  },
+  {
+    num: "04",
     label: "Engineering & Teaching",
     desc: "Building CausalBlogs and Orion, teaching computer science, and sharing what I learn.",
   },
@@ -212,10 +218,11 @@ const focusAreas = [
 
 export default function HomePage() {
   return (
-    <div>
-      <section className="hero-gradient border-b border-[var(--line)]">
+    <div className="cultivation-home">
+      <section className="hero-gradient cultivation-hero border-b border-[var(--line)]">
+        <CultivationRealm />
         <div className="page-shell grid min-h-[calc(100svh-3.5rem)] items-center gap-10 py-16 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="max-w-2xl">
+          <div className="realm-introduction max-w-2xl">
             <span className="research-status inline-flex items-center gap-2 border border-[var(--line)] px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
               <span className="h-1.5 w-1.5 bg-[var(--accent-warm)]" />
               AI Research / Digital Character AI
@@ -228,7 +235,7 @@ export default function HomePage() {
             </p>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--ink-soft)] sm:text-lg">
               I&apos;m an Assistant Professor of CSE and full-stack developer exploring
-              Digital Character AI and AI/ML security. I connect research, teaching,
+              Digital Character AI, AI/ML security, and Linguistic Stenography. I connect research, teaching,
               and practice through the systems I build.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-[var(--ink-soft)]">
@@ -254,7 +261,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="soft-card focus-panel p-5">
+          <div className="soft-card focus-panel realm-research p-5">
             <div className="p-3 sm:p-5">
               <p className="kicker">Research notebook</p>
               <h2 className="research-question mt-5">How can AI characters feel alive<br />and stay grounded?</h2>

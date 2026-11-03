@@ -16,7 +16,7 @@ const experiences = [
     highlights: [
       "Faculty role covering undergraduate and polytechnic-level CS coursework.",
       "Building curriculum and notes content for web development essentials.",
-      "Research direction in AI/ML security and Digital Character AI.",
+      "Research interests in AI/ML security, Digital Character AI, and Linguistic Stenography.",
     ],
   },
   {
@@ -81,7 +81,7 @@ const stats = [
   { label: "Research focus", value: "AI/ML Security" },
 ];
 
-const researchInterests = ["AI/ML security", "Digital Character AI"];
+const researchInterests = ["AI/ML security", "Digital Character AI", "Linguistic Stenography"];
 
 export default function AboutPage() {
   return (
@@ -101,7 +101,7 @@ export default function AboutPage() {
               <p className="mt-4 text-base leading-7 text-[var(--ink-soft)]">
                 Currently teaching at Career Point University near Kota, while
                 building CausalBlogs and Orion and continuing research direction
-                in AI/ML security and Digital Character AI.
+                in AI/ML security, Digital Character AI, and Linguistic Stenography.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-3">
