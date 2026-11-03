@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 
 import { openAssistant } from "@/lib/assistant/events";
+import { ASSISTANT_VISIBLE } from "@/lib/assistant/visibility";
 import { submitToFormsubmit } from "@/lib/formsubmit";
 
 type FormStatus = {
@@ -68,7 +69,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="soft-card mb-6 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
+        {ASSISTANT_VISIBLE && <div className="soft-card mb-6 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <Image
               src="/avatar/buu-face-160.webp"
@@ -89,7 +90,7 @@ export default function ContactPage() {
             Chat now
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
           </button>
-        </div>
+        </div>}
 
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="soft-card p-6">
