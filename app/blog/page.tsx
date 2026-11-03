@@ -23,7 +23,7 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <div>
+    <div className="realm-page realm-journal">
       <section className="page-shell section-pad max-w-5xl">
         <div className="page-heading mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div className="max-w-2xl">

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Pause, Play } from 'lucide-react';
 
 const navLinks = [
   { href: '/about', label: 'About' },
@@ -17,7 +17,23 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [motionPaused, setMotionPaused] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    try {
+      const paused = localStorage.getItem('realm-motion') === 'paused';
+      setMotionPaused(paused);
+      document.documentElement.dataset.realmMotion = paused ? 'paused' : 'playing';
+    } catch { /* The theme works without browser storage. */ }
+  }, []);
+
+  function toggleMotion() {
+    const paused = !motionPaused;
+    setMotionPaused(paused);
+    document.documentElement.dataset.realmMotion = paused ? 'paused' : 'playing';
+    try { localStorage.setItem('realm-motion', paused ? 'paused' : 'playing'); } catch { /* Optional preference persistence. */ }
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
@@ -65,7 +81,7 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (
                 <Link
                   key={link.href}
@@ -83,6 +99,10 @@ export default function Navbar() {
             })}
           </div>
 
+          <div className="flex items-center gap-2">
+          <button type="button" onClick={toggleMotion} className="realm-motion-toggle" aria-pressed={motionPaused} aria-label={motionPaused ? 'Resume site animations' : 'Pause site animations'} title={motionPaused ? 'Resume site animations' : 'Pause site animations'}>
+            {motionPaused ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}
+          </button>
           <button
             onClick={() => setIsOpen((o) => !o)}
             type="button"
@@ -93,6 +113,7 @@ export default function Navbar() {
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+          </div>
         </div>
       </div>
 
@@ -100,7 +121,7 @@ export default function Navbar() {
         <div id="mobile-navigation" className="border-t border-[var(--line)] bg-[var(--bg)] lg:hidden">
           <div className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto px-4 py-2 space-y-0.5">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
               return (
                 <Link
                   key={link.href}

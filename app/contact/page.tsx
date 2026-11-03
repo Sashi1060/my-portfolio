@@ -58,7 +58,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div>
+    <div className="realm-page realm-sanctuary">
       <section className="page-shell section-pad max-w-5xl">
         <div className="page-heading mb-10">
           <p className="kicker">Contact</p>
@@ -186,7 +186,7 @@ export default function ContactPage() {
               </div>
 
               {formStatus.submitted && (
-                <p className={`text-sm ${formStatus.success ? "text-emerald-700" : "text-red-600"}`}>
+                <p className={`text-sm ${formStatus.success ? "text-emerald-300" : "text-red-300"}`}>
                   {formStatus.message}
                 </p>
               )}

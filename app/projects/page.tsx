@@ -22,7 +22,7 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="realm-page realm-forge">
       <section className="page-shell section-pad">
         <div className="page-heading mb-10">
           <p className="kicker">Projects</p>

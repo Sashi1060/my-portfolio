@@ -17,8 +17,8 @@ export default function PostListItem({ post }: { post: BlogPost }) {
   const date = formatDate(post.publishedAt);
 
   return (
-    <article className="overflow-hidden soft-card soft-card-hover">
-      <div className="aspect-[3/1] overflow-hidden bg-stone-200">
+    <article className="overflow-hidden soft-card soft-card-hover realm-post-card">
+      <div className="aspect-[3/1] overflow-hidden bg-[var(--surface-raised)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={imageUrl} alt="" className="h-full w-full object-cover" />
       </div>

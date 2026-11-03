@@ -327,7 +327,7 @@ export default function HomePage() {
             {experiences.map((exp) => (
               <article key={exp.role} className="p-6 soft-card soft-card-hover">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--accent)] text-white">
+                  <div className="realm-icon grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--accent)] text-white">
                     <Briefcase className="h-4 w-4" />
                   </div>
                   <div>

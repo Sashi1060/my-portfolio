@@ -228,7 +228,7 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage, onN
               </p>
               <p
                 className={`whitespace-pre-wrap rounded-xl border px-3.5 py-2.5 text-sm leading-6 text-[var(--ink)] ${
-                  message.role === "user" ? "border-[var(--accent)] bg-[var(--bg)]" : "border-[var(--line)] bg-white"
+                  message.role === "user" ? "border-[var(--accent)] bg-[var(--bg)]" : "border-[var(--line)] bg-[var(--surface-raised)]"
                 }`}
               >
                 {message.text}
@@ -243,7 +243,7 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage, onN
                 <button
                   type="button"
                   onClick={() => message.navigation && teleport(message.id, message.navigation)}
-                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-[var(--accent)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--accent)] transition hover:bg-[var(--bg)]"
+                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-[var(--accent)] bg-[var(--surface-raised)] px-3 py-1.5 text-xs font-bold text-[var(--accent)] transition hover:bg-[var(--bg)]"
                 >
                   <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                   Teleport to {message.navigation.label}
@@ -257,7 +257,7 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage, onN
         {sending && <p className="text-sm text-[var(--ink-soft)]">The assistant is thinking…</p>}
 
         {quotaReached && (
-          <p role="status" className="rounded-xl border border-[var(--line)] bg-white px-3.5 py-2.5 text-sm text-[var(--ink)]">
+          <p role="status" className="rounded-xl border border-[var(--line)] bg-[var(--surface-raised)] px-3.5 py-2.5 text-sm text-[var(--ink)]">
             You can still reach Sashank any time with the{" "}
             <a href={CONTACT_FORM_URL} className="font-semibold text-[var(--accent)] underline">
               contact form
@@ -267,7 +267,7 @@ export default function AssistantChat({ onSendingChange, onAssistantMessage, onN
         )}
 
         {notice && (
-          <p role="status" className="rounded-xl border border-[var(--line)] bg-white px-3.5 py-2.5 text-sm text-[var(--ink)]">
+          <p role="status" className="rounded-xl border border-[var(--line)] bg-[var(--surface-raised)] px-3.5 py-2.5 text-sm text-[var(--ink)]">
             {notice.kind === "rate" ? `${notice.text} Please wait ${secondsLeft} second${secondsLeft === 1 ? "" : "s"}.` : notice.text}
             {(notice.kind === "unavailable" || notice.kind === "network") && (
               <>
@@ -404,7 +404,7 @@ function ContactInChat({ sessionId }: { sessionId: string }) {
 
   return (
     <form
-      className="relative mt-2 space-y-3 rounded border border-[var(--line)] bg-white p-3.5"
+      className="relative mt-2 space-y-3 rounded border border-[var(--line)] bg-[var(--surface-raised)] p-3.5"
       onSubmit={(event) => {
         event.preventDefault();
         void submit(event.currentTarget);
@@ -434,7 +434,7 @@ function ContactInChat({ sessionId }: { sessionId: string }) {
         </label>
         <textarea id="assistant-contact-message" name="message" required rows={3} maxLength={4000} className="field resize-none" />
       </div>
-      {state.kind === "error" && <p role="alert" className="text-sm text-red-600">{state.text}</p>}
+      {state.kind === "error" && <p role="alert" className="text-sm text-red-300">{state.text}</p>}
       <button type="submit" disabled={state.kind === "sending"} className="btn-secondary w-full disabled:opacity-50">
         {state.kind === "sending" ? "Sending…" : "Send message"}
       </button>

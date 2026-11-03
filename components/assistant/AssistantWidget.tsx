@@ -208,7 +208,7 @@ export default function AssistantWidget() {
           aria-labelledby="assistant-widget-title"
           className={`fixed inset-0 z-50 ${open ? "flex" : "hidden"} flex-col overflow-hidden bg-[var(--card-bg)] sm:inset-auto sm:bottom-24 sm:right-5 sm:h-[min(40rem,calc(100dvh-8rem))] sm:w-[24rem] sm:rounded-[20px] sm:border sm:border-[var(--line)] sm:shadow-[0_24px_60px_rgb(23_40_73/18%)]`}
         >
-          <div className="flex items-center justify-between gap-3 border-b border-[var(--line)] bg-white/80 px-4 py-3">
+          <div className="flex items-center justify-between gap-3 border-b border-[var(--line)] bg-[var(--surface-raised)] px-4 py-3">
             <div className="min-w-0">
               <h2 id="assistant-widget-title" className="field-label text-[var(--ink)]">
                 Portfolio Assistant
@@ -265,7 +265,7 @@ export default function AssistantWidget() {
             </div>
             {(phase === "vanish" || phase === "appear") && <div className="buu-flash pointer-events-none absolute inset-0" />}
             {mode === "3d" && status === "loading" && (
-              <div className="absolute inset-x-6 bottom-3 h-1 overflow-hidden rounded-full bg-white/70">
+              <div className="absolute inset-x-6 bottom-3 h-1 overflow-hidden rounded-full bg-[var(--surface-raised)]/70">
                 <div className="h-full bg-[var(--accent)] transition-[width]" style={{ width: `${Math.round(progress * 100)}%` }} />
               </div>
             )}

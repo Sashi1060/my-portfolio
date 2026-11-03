@@ -1,0 +1,147 @@
+/* Shared realm palette. Motion belongs to entrances and decoration; reading
+   surfaces and forms stay still. The PDF viewer retains its native paper. */
+:root {
+  color-scheme: dark;
+  --bg: #081b21;
+  --card-bg: #10292c;
+  --surface-raised: #163438;
+  --ink: #f0f2e4;
+  --ink-soft: #b3cac4;
+  --accent: #a5edd6;
+  --accent-warm: #e7c885;
+  --line: #31504f;
+  --gradient-signal: linear-gradient(115deg, #edd6a0, #b6e6c3 65%, #9cdbc9);
+  --gradient-paper: linear-gradient(130deg, #173c3b, #10272e 65%, #1d3335);
+}
+body {
+  background: radial-gradient(ellipse at 0% 15%, #183d373d, transparent 50%), linear-gradient(135deg, #081b21, #0b2225);
+}
+::selection { color: #fff8dd; background: #406d5d; }
+.site-nav {
+  background: linear-gradient(100deg, #091e23f2, #12332ef0);
+  border-color: #bda56a40;
+  box-shadow: 0 1px 0 #eedba10d, 0 8px 32px #0002;
+}
+.site-nav a[aria-current="page"] { color: var(--accent-warm); border-color: var(--accent-warm); }
+.site-nav .gradient-band { color: #efd7a2; border: 1px solid #d3ba7250; border-radius: 2px 9px; background: #1c3c35; }
+.site-nav a, .site-nav button { min-height: 44px; }
+.realm-motion-toggle { display: grid; place-items: center; width: 40px; border-radius: 50%; border: 1px solid var(--line); color: var(--accent-warm); background: #c8dfb608; transition: border-color .2s, background .2s; }
+.realm-motion-toggle:hover { border-color: var(--accent-warm); background: #d2bd7b12; }
+.gradient-band, .cultivation-home .gradient-band {
+  position: relative;
+  background: radial-gradient(ellipse at 85% 100%, #315548, transparent 60%), linear-gradient(120deg, #091f24, #16342e);
+  border-color: #c8b47b40;
+}
+footer.gradient-band { border-top: 1px solid #c8b47b50; }
+footer a { display: inline-flex; align-items: center; min-height: 36px; }
+footer .text-stone-400 { color: #acbeb4; }
+footer .text-stone-300 { color: #c8d4c7; }
+.page-heading {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid #bda56a50;
+  border-radius: 4px 30px 4px 30px;
+  background: radial-gradient(ellipse at 95% 20%, #386b534d, transparent 60%), var(--gradient-paper);
+  box-shadow: inset 0 1px 0 #e8d5a21c, 0 20px 55px #0002;
+}
+.page-heading > * { position: relative; z-index: 1; }
+.page-heading::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  aspect-ratio: 1;
+  right: -90px;
+  top: -115px;
+  border: 1px dashed #dfc98b38;
+  outline: 1px solid #b5ddc21a;
+  outline-offset: 14px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 35px #b5ddc205, 0 0 65px #a5edd608;
+  pointer-events: none;
+  animation: realm-turn 100s linear infinite;
+}
+.page-heading::after {
+  content: "";
+  position: absolute;
+  inset: 35% 0 0 45%;
+  background: linear-gradient(170deg, #95bf9d17, #091b2440);
+  clip-path: polygon(0 100%, 20% 45%, 30% 65%, 49% 0, 65% 65%, 78% 30%, 100% 100%);
+  pointer-events: none;
+}
+.display-title { letter-spacing: -.045em; }
+.display-title::after { height: 2px; width: 70px; box-shadow: 0 0 16px #e7c88525; }
+.section-title { letter-spacing: -.025em; }
+.kicker { color: #dcc88e; }
+.kicker::before { height: 2px; background: var(--gradient-signal); }
+.soft-card {
+  border-color: var(--line);
+  border-radius: 5px 20px 5px 20px;
+  background: linear-gradient(145deg, #153335, #10272b);
+  box-shadow: inset 0 1px 0 #d6eac010, 0 8px 28px #00000014;
+}
+.soft-card-hover:hover, .cultivation-home > section:not(.cultivation-hero) .soft-card-hover:hover {
+  background: linear-gradient(145deg, #1a3c3c, #132d30);
+  border-color: #a4b77b;
+  transform: translateY(-4px);
+  box-shadow: inset 0 1px 0 #e7c88526, 0 18px 40px #0003, 0 0 25px #a5edd608;
+}
+.chip { color: #c9dfce; border-color: #496254; background: #a3c8a90b; border-radius: 3px 8px; }
+.btn-primary {
+  color: #102a24;
+  background: var(--gradient-signal);
+  border: 1px solid #eddaa180;
+  border-radius: 3px 12px;
+  box-shadow: inset 0 1px 0 #fff6, 0 5px 22px #e7c88510;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-primary:hover { color: #102a24; background: linear-gradient(115deg, #fff0c4, #c1f5d8); transform: translateY(-2px); box-shadow: 0 8px 28px #a5edd626; }
+.btn-secondary { color: var(--ink); background: #9dd6bb08; border-color: #6b8168; border-radius: 3px 12px; box-shadow: inset 0 1px 0 #d3e5b50b; }
+.btn-secondary:hover { color: #f3dfac; border-color: #dec78e; background: #d6c38b0c; }
+.gradient-band .btn-secondary { color: #f0e3bf; background: #122f2e; border-color: #a2ac7b; }
+.field { color: var(--ink); background: #091f26; border-color: #43625b; border-radius: 5px 12px; box-shadow: inset 0 2px 8px #0002; }
+.field::placeholder { color: #90aaa5; }
+.field:focus { border-color: var(--accent-warm); box-shadow: 0 0 0 3px #e7c88518; }
+.field-label, .spec-label { color: #c8d5bd; }
+.spec-row { border-color: #42605a80; }
+.realm-icon { color: #e7d09b !important; background: #24453d !important; border: 1px solid #d2bd7950; border-radius: 4px 12px; }
+.realm-route { animation: realm-page-arrive .55s ease-out both; }
+@keyframes realm-page-arrive { from { opacity: .4; translate: 0 9px; } to { opacity: 1; translate: 0 0; } }
+/* Each page gets an ornament suited to its content. */
+.realm-forge .page-heading::before { border-radius: 20%; border-style: solid; border-color: #a5edd640; }
+.realm-project-card { border-top: 2px solid #8caa7c; }
+.realm-project-card img, .realm-post-card img { transition: transform .6s ease, filter .6s ease; }
+.realm-project-card:hover img, .realm-post-card:hover img { transform: scale(1.035); filter: saturate(1.08); }
+.realm-archive .page-heading::before { border-style: double; border-width: 4px; }
+.realm-publication { border-left-color: #bda56a; border-radius: 3px 18px 18px 3px; }
+.realm-publication:hover { transform: translateY(-2px); }
+.realm-journal .page-heading::before { width: 220px; top: -80px; background: radial-gradient(circle at 35% 30%, #ead9a020, #acd6b308 65%, transparent); border-style: solid; }
+.realm-post-card { border-bottom: 2px solid #95865b; }
+.realm-record .page-heading::before { animation: none; border-radius: 3px; width: 160px; top: -45px; transform: rotate(25deg); border-style: double; border-width: 4px; }
+.realm-record iframe { color-scheme: light; }
+.realm-sanctuary .page-heading::before { border-style: solid; box-shadow: 0 0 0 25px #e7c88504, 0 0 0 55px #a5edd605; }
+.realm-sanctuary #contact-form { border-top: 2px solid #bda56a; }
+.realm-about-hero > .page-shell { padding-top: 80px; padding-bottom: 100px; }
+.realm-about-hero .realm-seal { width: min(55vw, 570px); top: -15%; right: -7%; opacity: .25; }
+.realm-about-hero .realm-moon { opacity: .3; }
+.realm-about-hero .soft-card { background: #102e30dc; backdrop-filter: blur(8px); }
+.realm-journey > .page-shell:nth-of-type(2) article { border-left: 2px solid #bda56a80; }
+.realm-journey section:has(.chip) .soft-card { border-top: 1px solid #8fab7c; }
+.realm-project-detail .display-title { color: #e8ddb9; }
+.realm-project-detail .soft-card { border-color: #8f9f6d80; }
+/* Loading states use quiet jade surfaces, rather than bright placeholders. */
+main .animate-pulse { background-color: var(--surface-raised); }
+main .animate-pulse > .bg-stone-200 { background-color: var(--surface-raised); }
+button:disabled { transform: none; }
+@media (max-width: 639px) {
+  .page-heading::before { right: -180px; opacity: .65; }
+  .page-heading::after { inset-inline-start: 15%; opacity: .5; }
+  .realm-about-hero > .page-shell { padding-top: 55px; padding-bottom: 90px; }
+}
+html[data-realm-motion="paused"] *, html[data-realm-motion="paused"] *::before, html[data-realm-motion="paused"] *::after { animation-play-state: paused !important; }
+html[data-realm-motion="paused"] .realm-route, html[data-realm-motion="paused"] .realm-introduction, html[data-realm-motion="paused"] .realm-research { animation: none !important; }
+html[data-realm-motion="paused"] { scroll-behavior: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .realm-route, .page-heading::before { animation: none; }
+  .soft-card-hover:hover, .realm-publication:hover, .btn-primary:hover, .realm-project-card:hover img, .realm-post-card:hover img { transform: none; }
+}

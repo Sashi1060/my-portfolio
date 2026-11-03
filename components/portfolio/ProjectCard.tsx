@@ -27,9 +27,9 @@ function linkIcon(label: string) {
 
 export default function ProjectCard({ project }: { project: PortfolioProject }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden soft-card soft-card-hover">
+    <article className="flex h-full flex-col overflow-hidden soft-card soft-card-hover realm-project-card">
       {project.coverImageUrl && (
-        <div className="aspect-[16/9] shrink-0 overflow-hidden bg-stone-200">
+        <div className="aspect-[16/9] shrink-0 overflow-hidden bg-[var(--surface-raised)]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.coverImageUrl}

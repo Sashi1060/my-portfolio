@@ -1,3 +1,4 @@
+import CultivationRealm from "@/components/site/CultivationRealm";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -85,8 +86,9 @@ const researchInterests = ["AI/ML security", "Digital Character AI", "Linguistic
 
 export default function AboutPage() {
   return (
-    <div>
-      <section className="hero-gradient border-b border-[var(--line)]">
+    <div className="realm-page realm-journey">
+      <section className="hero-gradient cultivation-hero realm-about-hero border-b border-[var(--line)]">
+        <CultivationRealm />
         <div className="page-shell section-pad">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="max-w-3xl">
@@ -125,7 +127,7 @@ export default function AboutPage() {
           {experiences.map((exp) => (
             <article key={exp.role} className="p-6 soft-card soft-card-hover">
               <div className="flex flex-col gap-4 sm:flex-row">
-                    <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--accent)] text-white">
+                    <div className="realm-icon grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--accent)] text-white">
                   <Briefcase className="h-4 w-4" />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -166,7 +168,7 @@ export default function AboutPage() {
             {education.map((item) => (
               <article key={item.degree} className="p-6 soft-card">
                 <div className="flex flex-col gap-4 sm:flex-row">
-                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--ink)] text-white">
+                  <div className="realm-icon grid h-11 w-11 flex-shrink-0 place-items-center rounded bg-[var(--ink)] text-white">
                     <GraduationCap className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">

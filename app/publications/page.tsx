@@ -22,7 +22,7 @@ export default function PublicationsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="realm-page realm-archive">
       <section className="page-shell section-pad max-w-5xl">
         <div className="page-heading mb-10">
           <p className="kicker">Publications</p>

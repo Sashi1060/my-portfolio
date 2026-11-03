@@ -24,7 +24,7 @@ export default function ResumePage() {
   }, []);
 
   return (
-    <div>
+    <div className="realm-page realm-record">
       <section className="page-shell section-pad max-w-5xl">
         <div className="page-heading mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div className="max-w-2xl">

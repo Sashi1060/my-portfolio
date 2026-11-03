@@ -35,10 +35,10 @@ export default function ProjectDetailPage() {
     return (
       <div className="page-shell max-w-4xl py-16">
         <div className="space-y-4 animate-pulse">
-          <div className="h-4 w-24 rounded bg-stone-200" />
-          <div className="h-9 w-64 rounded bg-stone-200" />
-          <div className="h-4 w-full rounded bg-stone-200" />
-          <div className="h-4 w-3/4 rounded bg-stone-200" />
+          <div className="h-4 w-24 rounded bg-[var(--surface-raised)]" />
+          <div className="h-9 w-64 rounded bg-[var(--surface-raised)]" />
+          <div className="h-4 w-full rounded bg-[var(--surface-raised)]" />
+          <div className="h-4 w-3/4 rounded bg-[var(--surface-raised)]" />
         </div>
       </div>
     );
@@ -56,14 +56,14 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div>
+    <div className="realm-page realm-project-detail">
       <div className="page-shell section-pad max-w-4xl">
         <Link href="/projects" className="mb-8 inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] hover:text-[var(--ink)]">
           <ArrowLeft className="h-4 w-4" /> All projects
         </Link>
 
         {project.coverImageUrl && (
-          <div className="mb-8 aspect-[16/9] overflow-hidden soft-card bg-stone-200">
+          <div className="mb-8 aspect-[16/9] overflow-hidden soft-card bg-[var(--surface-raised)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={project.coverImageUrl} alt="" className="h-full w-full object-cover" />
           </div>

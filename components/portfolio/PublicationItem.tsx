@@ -18,7 +18,7 @@ export default function PublicationItem({ publication }: { publication: Publicat
   const hasPublicLink = /^https?:\/\//i.test(publication.linkUrl?.trim() ?? "");
 
   return (
-    <article className="p-6 soft-card soft-card-hover border-l-4 border-l-[var(--accent)] sm:p-8">
+    <article className="realm-publication p-6 soft-card soft-card-hover border-l-4 border-l-[var(--accent)] sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0 flex-1">
           <div className="mb-3 flex flex-wrap items-center gap-2">
